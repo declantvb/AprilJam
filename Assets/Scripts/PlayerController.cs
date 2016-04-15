@@ -8,14 +8,16 @@ public class PlayerController : MonoBehaviour
 	public float speed = 1.0f;
 
 	public GameObject bullet;
-	public float shootDelay = 0.1f;
-	private bool canShoot = true;
+	public string horizontal2Axis = "Horizontal2";
+	public string vertical2Axis = "Vertical2";
+	public float shootDelay = 1f;
+	private float shootCooldown = 0f;
 	private Rigidbody2D rigidbodys;
 
 	// Use this for initialization
 	void Start()
 	{
-		canShoot = true;
+		shootCooldown = 0f;
 		rigidbodys = GetComponent<Rigidbody2D>();
 	}
 
@@ -25,21 +27,31 @@ public class PlayerController : MonoBehaviour
 		//move
 		var targetVelocity = (Vector2.right * Input.GetAxis(horizontalAxis) + Vector2.up * Input.GetAxis(verticalAxis)).normalized * speed;
 		var delta = targetVelocity - rigidbodys.velocity;
-		rigidbodys.AddForce(delta, ForceMode2D.Impulse);
+		rigidbodys.MovePosition(rigidbodys.position + delta * Time.deltaTime);
 
 		//shoot
-		//Vector3 shootDirection = Vector3.right * Input.GetAxis(horizontalAxis) + Vector3.up * Input.GetAxis(verticalAxis);
-		//if (shootDirection.sqrMagnitude > 0.0f)
-		//{
-		//	transform.rotation = Quaternion.LookRotation(shootDirection, Vector3.back);
+		Vector2 shootDirection = Vector2.right * Input.GetAxis(horizontal2Axis) + Vector2.up * Input.GetAxis(vertical2Axis);
 
-		//	if (canShoot)
-		//	{
-		//		Instantiate(bullet, transform.position, transform.rotation);
 
-		//		canShoot = false;
-		//		Invoke("ResetShot", shootDelay);
-		//	}
-		//}
+		if (shootDirection.sqrMagnitude == 0.0f)
+		{
+			var mousePos = Input.mousePosition;
+			shootDirection = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		}
+
+		if (shootDirection.sqrMagnitude > 0.0f)
+		{
+			var rot = Quaternion.LookRotation(shootDirection, Vector3.forward);
+			rot.x = 0;
+			rot.y = 0;
+			transform.rotation = rot;
+
+			if (shootCooldown < 0f)
+			{
+				Instantiate(bullet, transform.position, transform.rotation);
+
+				shootCooldown = shootDelay;
+			}
+		}
 	}
 }
