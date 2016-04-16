@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour
 	public string VerticalAimAxis;
 	public string FireAxis;
 	public string WeaponSwitchAxis;
+	public Rect ViewportRect;
 
 	public bool bound = false;
 	public InputController inputMaster;
@@ -24,13 +25,16 @@ public class Controller : MonoBehaviour
 	{
 		if (!bound && Input.GetAxis(FireAxis) > 0)
 		{
-			var player = inputMaster.NextAvailablePlayer().GetComponentInChildren<PlayerController>();
-			player.horizontalAxis = HorizontalAxis;
-			player.verticalAxis = VerticalAxis;
-			player.horizontal2Axis = HorizontalAimAxis;
-			player.vertical2Axis = VerticalAimAxis;
-			player.shootAxis = FireAxis;
-			player.WeaponSwitchAxis = WeaponSwitchAxis;
+			var player = inputMaster.NextAvailablePlayer();
+			var avatar = player.GetComponentInChildren<PlayerController>();
+			avatar.horizontalAxis = HorizontalAxis;
+			avatar.verticalAxis = VerticalAxis;
+			avatar.horizontal2Axis = HorizontalAimAxis;
+			avatar.vertical2Axis = VerticalAimAxis;
+			avatar.shootAxis = FireAxis;
+			avatar.WeaponSwitchAxis = WeaponSwitchAxis;
+			var camera = player.GetComponentInChildren<CameraController>();
+			camera.updateCameraViewport(ViewportRect);
 
 			bound = true;
 		}
