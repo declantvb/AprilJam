@@ -74,8 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b7bba0554f8364a8e595ff2675cc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 10
+  MaxSpeed: 2
   Target: {fileID: 0}
+  nextWaypointDistance: 0.3
 --- !u!114 &11474574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,7 +94,7 @@ MonoBehaviour:
     addPoints: 0
     exactStartPoint: 3
     exactEndPoint: 3
-    useRaycasting: 0
+    useRaycasting: 1
     mask:
       serializedVersion: 2
       m_Bits: 4294967295
