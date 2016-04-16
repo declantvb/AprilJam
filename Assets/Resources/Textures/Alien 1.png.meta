@@ -140,7 +140,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -151,304 +151,6 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 11, y: -12}
-        - {x: 13, y: -13}
-        - {x: 14, y: -13}
-        - {x: 15, y: -10}
-        - {x: 15, y: 5}
-        - {x: 9, y: 9}
-        - {x: -6, y: 9}
-        - {x: -11, y: 8}
-        - {x: -14, y: 3}
-        - {x: -14, y: -13}
-        - {x: 6, y: -13}
-        - {x: 7, y: -9}
-        - {x: 7, y: -7}
-        - {x: 7, y: -9}
-    - name: Alien 1_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 11, y: 11}
-        - {x: -9, y: 11}
-        - {x: -15, y: 7}
-        - {x: -15, y: -11}
-        - {x: -11, y: -13}
-        - {x: 9, y: -13}
-        - {x: 16, y: -12}
-        - {x: 16, y: 5}
-    - name: Alien 1_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 9}
-        - {x: -16, y: 3}
-        - {x: -16, y: -9}
-        - {x: -13, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 9}
-    - name: Alien 1_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -6, y: 9}
-        - {x: -16, y: 4}
-        - {x: -16, y: -15}
-        - {x: -15, y: -16}
-        - {x: 15, y: -16}
-        - {x: 16, y: -14}
-        - {x: 16, y: 6}
-        - {x: 13, y: 9}
-    - name: Alien 1_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -6, y: 8}
-        - {x: -9, y: 7}
-        - {x: -13, y: 4}
-        - {x: -13, y: -12}
-        - {x: -10, y: -13}
-        - {x: 9, y: -13}
-        - {x: 14, y: -9}
-        - {x: 14, y: 2}
-        - {x: 7, y: 8}
-    - name: Alien 1_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 9}
-        - {x: -14, y: -11}
-        - {x: -11, y: -13}
-        - {x: 7, y: -13}
-        - {x: 16, y: -10}
-        - {x: 16, y: -1}
-        - {x: 13, y: 9}
-    - name: Alien 1_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 8}
-        - {x: -16, y: 8}
-    - name: Alien 1_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -3, y: 8}
-        - {x: -15, y: 5}
-        - {x: -16, y: 3}
-        - {x: -16, y: -15}
-        - {x: -15, y: -16}
-        - {x: 15, y: -16}
-        - {x: 16, y: -15}
-        - {x: 16, y: 1}
-        - {x: 7, y: 8}
-    - name: Alien 1_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 6, y: 5}
-        - {x: -12, y: 5}
-        - {x: -15, y: -1}
-        - {x: -15, y: -9}
-        - {x: 11, y: -9}
-        - {x: 14, y: -5}
-        - {x: 14, y: -1}
-        - {x: 10, y: 3}
-    - name: Alien 1_9
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 8}
-        - {x: -15, y: 7}
-        - {x: -16, y: -1}
-        - {x: -16, y: -9}
-        - {x: -10, y: -10}
-        - {x: 6, y: -10}
-        - {x: 16, y: -8}
-        - {x: 16, y: 2}
-        - {x: 15, y: 8}
-    - name: Alien 1_10
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 7}
-        - {x: -16, y: -14}
-        - {x: 9, y: -14}
-        - {x: 16, y: -10}
-        - {x: 16, y: 6}
-        - {x: 13, y: 7}
-    - name: Alien 1_11
-      rect:
-        serializedVersion: 2
-        x: 352
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -13, y: 5}
-        - {x: -16, y: 3}
-        - {x: -16, y: -14}
-        - {x: -15, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 3}
-        - {x: 15, y: 5}
-    - name: Alien 1_12
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 10, y: 5}
-        - {x: -10, y: 5}
-        - {x: -14, y: 1}
-        - {x: -14, y: -6}
-        - {x: -10, y: -9}
-        - {x: 13, y: -9}
-        - {x: 15, y: -6}
-        - {x: 15, y: 3}
-    - name: Alien 1_13
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -9, y: 8}
-        - {x: -15, y: 6}
-        - {x: -16, y: 5}
-        - {x: -16, y: -8}
-        - {x: -13, y: -10}
-        - {x: 16, y: -10}
-        - {x: 16, y: 6}
-        - {x: 11, y: 8}
-    - name: Alien 1_14
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 7}
-        - {x: -16, y: -12}
-        - {x: -9, y: -14}
-        - {x: 15, y: -14}
-        - {x: 16, y: -12}
-        - {x: 16, y: 7}
-    - name: Alien 1_15
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 5}
-        - {x: -16, y: -13}
-        - {x: -15, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 5}
-    - name: Alien 1_16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -467,11 +169,11 @@ TextureImporter:
         - {x: 14, y: -6}
         - {x: 14, y: 10}
         - {x: 10, y: 11}
-    - name: Alien 1_17
+    - name: Alien 1_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -490,11 +192,11 @@ TextureImporter:
         - {x: -6, y: -5}
         - {x: -6, y: -7}
         - {x: -4, y: -10}
-    - name: Alien 1_18
+    - name: Alien 1_2
       rect:
         serializedVersion: 2
         x: 64
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -507,11 +209,11 @@ TextureImporter:
         - {x: 14, y: -10}
         - {x: 14, y: 11}
         - {x: 9, y: 13}
-    - name: Alien 1_19
+    - name: Alien 1_3
       rect:
         serializedVersion: 2
         x: 96
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -530,11 +232,11 @@ TextureImporter:
         - {x: -6, y: -5}
         - {x: -6, y: -7}
         - {x: -4, y: -10}
-    - name: Alien 1_20
+    - name: Alien 1_4
       rect:
         serializedVersion: 2
         x: 128
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -555,11 +257,11 @@ TextureImporter:
         - {x: -6, y: -5}
         - {x: -6, y: -7}
         - {x: -2, y: -10}
-    - name: Alien 1_21
+    - name: Alien 1_5
       rect:
         serializedVersion: 2
         x: 160
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -574,11 +276,11 @@ TextureImporter:
         - {x: 15, y: -8}
         - {x: 15, y: 7}
         - {x: 13, y: 12}
-    - name: Alien 1_22
+    - name: Alien 1_6
       rect:
         serializedVersion: 2
         x: 192
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -593,11 +295,11 @@ TextureImporter:
         - {x: 15, y: 1}
         - {x: 15, y: 5}
         - {x: 9, y: 12}
-    - name: Alien 1_23
+    - name: Alien 1_7
       rect:
         serializedVersion: 2
         x: 224
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -613,11 +315,11 @@ TextureImporter:
         - {x: 15, y: -6}
         - {x: 15, y: 10}
         - {x: 12, y: 12}
-    - name: Alien 1_24
+    - name: Alien 1_8
       rect:
         serializedVersion: 2
         x: 256
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -631,11 +333,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 6}
         - {x: 4, y: 10}
-    - name: Alien 1_25
+    - name: Alien 1_9
       rect:
         serializedVersion: 2
         x: 288
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -654,11 +356,11 @@ TextureImporter:
         - {x: 10, y: -10}
         - {x: 14, y: -8}
         - {x: 14, y: 3}
-    - name: Alien 1_26
+    - name: Alien 1_10
       rect:
         serializedVersion: 2
         x: 320
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -672,11 +374,11 @@ TextureImporter:
         - {x: -13, y: -8}
         - {x: -11, y: -9}
         - {x: 14, y: -9}
-    - name: Alien 1_27
+    - name: Alien 1_11
       rect:
         serializedVersion: 2
         x: 352
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -695,11 +397,11 @@ TextureImporter:
         - {x: 10, y: -10}
         - {x: 14, y: -8}
         - {x: 14, y: 3}
-    - name: Alien 1_28
+    - name: Alien 1_12
       rect:
         serializedVersion: 2
         x: 384
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -715,11 +417,11 @@ TextureImporter:
         - {x: 14, y: -10}
         - {x: 14, y: 3}
         - {x: 9, y: 10}
-    - name: Alien 1_29
+    - name: Alien 1_13
       rect:
         serializedVersion: 2
         x: 416
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -733,11 +435,11 @@ TextureImporter:
         - {x: 14, y: -11}
         - {x: 14, y: 3}
         - {x: 8, y: 10}
-    - name: Alien 1_30
+    - name: Alien 1_14
       rect:
         serializedVersion: 2
         x: 448
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -755,11 +457,11 @@ TextureImporter:
         - {x: 14, y: -11}
         - {x: 14, y: 3}
         - {x: 8, y: 9}
-    - name: Alien 1_31
+    - name: Alien 1_15
       rect:
         serializedVersion: 2
         x: 480
-        y: 192
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -773,11 +475,11 @@ TextureImporter:
         - {x: 14, y: -10}
         - {x: 14, y: 3}
         - {x: 8, y: 9}
-    - name: Alien 1_32
+    - name: Alien 1_16
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -791,11 +493,11 @@ TextureImporter:
         - {x: 7, y: -9}
         - {x: 14, y: -4}
         - {x: 14, y: 3}
-    - name: Alien 1_33
+    - name: Alien 1_17
       rect:
         serializedVersion: 2
         x: 32
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -809,11 +511,11 @@ TextureImporter:
         - {x: 14, y: -2}
         - {x: 14, y: 7}
         - {x: 12, y: 8}
-    - name: Alien 1_34
+    - name: Alien 1_18
       rect:
         serializedVersion: 2
         x: 64
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -827,11 +529,11 @@ TextureImporter:
         - {x: 14, y: -3}
         - {x: 14, y: 5}
         - {x: 7, y: 9}
-    - name: Alien 1_35
+    - name: Alien 1_19
       rect:
         serializedVersion: 2
         x: 96
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -845,11 +547,11 @@ TextureImporter:
         - {x: 14, y: -2}
         - {x: 14, y: 6}
         - {x: 9, y: 8}
-    - name: Alien 1_36
+    - name: Alien 1_20
       rect:
         serializedVersion: 2
         x: 128
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -862,11 +564,11 @@ TextureImporter:
         - {x: 11, y: -9}
         - {x: 14, y: -5}
         - {x: 14, y: 8}
-    - name: Alien 1_37
+    - name: Alien 1_21
       rect:
         serializedVersion: 2
         x: 160
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -881,11 +583,11 @@ TextureImporter:
         - {x: 9, y: -9}
         - {x: 14, y: -7}
         - {x: 14, y: 8}
-    - name: Alien 1_38
+    - name: Alien 1_22
       rect:
         serializedVersion: 2
         x: 192
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -900,11 +602,11 @@ TextureImporter:
         - {x: 14, y: -1}
         - {x: 14, y: 6}
         - {x: 10, y: 8}
-    - name: Alien 1_39
+    - name: Alien 1_23
       rect:
         serializedVersion: 2
         x: 224
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -920,11 +622,11 @@ TextureImporter:
         - {x: -6, y: -8}
         - {x: -5, y: -9}
         - {x: 9, y: -9}
-    - name: Alien 1_40
+    - name: Alien 1_24
       rect:
         serializedVersion: 2
         x: 256
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -938,11 +640,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 3}
         - {x: 11, y: 7}
-    - name: Alien 1_41
+    - name: Alien 1_25
       rect:
         serializedVersion: 2
         x: 288
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -957,11 +659,11 @@ TextureImporter:
         - {x: -9, y: -9}
         - {x: 12, y: -9}
         - {x: 14, y: -7}
-    - name: Alien 1_42
+    - name: Alien 1_26
       rect:
         serializedVersion: 2
         x: 320
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -974,11 +676,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 5}
         - {x: 9, y: 9}
-    - name: Alien 1_43
+    - name: Alien 1_27
       rect:
         serializedVersion: 2
         x: 352
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -993,11 +695,11 @@ TextureImporter:
         - {x: -9, y: -9}
         - {x: 12, y: -9}
         - {x: 14, y: -7}
-    - name: Alien 1_44
+    - name: Alien 1_28
       rect:
         serializedVersion: 2
         x: 384
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -1011,11 +713,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 2}
         - {x: 10, y: 8}
-    - name: Alien 1_45
+    - name: Alien 1_29
       rect:
         serializedVersion: 2
         x: 416
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -1031,11 +733,11 @@ TextureImporter:
         - {x: 12, y: -8}
         - {x: 12, y: 7}
         - {x: 9, y: 8}
-    - name: Alien 1_46
+    - name: Alien 1_30
       rect:
         serializedVersion: 2
         x: 448
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -1050,11 +752,11 @@ TextureImporter:
         - {x: 14, y: -8}
         - {x: 14, y: 5}
         - {x: 8, y: 8}
-    - name: Alien 1_47
+    - name: Alien 1_31
       rect:
         serializedVersion: 2
         x: 480
-        y: 160
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -1069,11 +771,11 @@ TextureImporter:
         - {x: 12, y: -8}
         - {x: 12, y: 5}
         - {x: 7, y: 8}
-    - name: Alien 1_48
+    - name: Alien 1_32
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1092,11 +794,11 @@ TextureImporter:
         - {x: 14, y: -6}
         - {x: 14, y: 10}
         - {x: 10, y: 11}
-    - name: Alien 1_49
+    - name: Alien 1_33
       rect:
         serializedVersion: 2
         x: 32
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1112,11 +814,11 @@ TextureImporter:
         - {x: 13, y: -10}
         - {x: 14, y: -8}
         - {x: 14, y: 9}
-    - name: Alien 1_50
+    - name: Alien 1_34
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1131,11 +833,11 @@ TextureImporter:
         - {x: 13, y: -10}
         - {x: 14, y: -8}
         - {x: 14, y: 10}
-    - name: Alien 1_51
+    - name: Alien 1_35
       rect:
         serializedVersion: 2
         x: 96
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1152,11 +854,11 @@ TextureImporter:
         - {x: 10, y: -10}
         - {x: 14, y: -7}
         - {x: 14, y: 7}
-    - name: Alien 1_52
+    - name: Alien 1_36
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1169,11 +871,11 @@ TextureImporter:
         - {x: -8, y: -9}
         - {x: 14, y: -9}
         - {x: 14, y: 15}
-    - name: Alien 1_53
+    - name: Alien 1_37
       rect:
         serializedVersion: 2
         x: 160
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1186,11 +888,11 @@ TextureImporter:
         - {x: -8, y: -9}
         - {x: 14, y: -9}
         - {x: 14, y: 15}
-    - name: Alien 1_54
+    - name: Alien 1_38
       rect:
         serializedVersion: 2
         x: 192
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1203,11 +905,11 @@ TextureImporter:
         - {x: -8, y: -9}
         - {x: 14, y: -9}
         - {x: 14, y: 15}
-    - name: Alien 1_55
+    - name: Alien 1_39
       rect:
         serializedVersion: 2
         x: 224
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1220,11 +922,11 @@ TextureImporter:
         - {x: -8, y: -9}
         - {x: 14, y: -9}
         - {x: 14, y: 15}
-    - name: Alien 1_56
+    - name: Alien 1_40
       rect:
         serializedVersion: 2
         x: 256
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1239,11 +941,11 @@ TextureImporter:
         - {x: 13, y: -10}
         - {x: 13, y: 10}
         - {x: 11, y: 14}
-    - name: Alien 1_57
+    - name: Alien 1_41
       rect:
         serializedVersion: 2
         x: 288
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1258,11 +960,11 @@ TextureImporter:
         - {x: 12, y: -12}
         - {x: 13, y: -9}
         - {x: 13, y: 10}
-    - name: Alien 1_58
+    - name: Alien 1_42
       rect:
         serializedVersion: 2
         x: 320
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1277,11 +979,11 @@ TextureImporter:
         - {x: 13, y: -11}
         - {x: 13, y: 6}
         - {x: 10, y: 11}
-    - name: Alien 1_59
+    - name: Alien 1_43
       rect:
         serializedVersion: 2
         x: 352
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1296,11 +998,11 @@ TextureImporter:
         - {x: 14, y: -14}
         - {x: 14, y: 5}
         - {x: 11, y: 10}
-    - name: Alien 1_60
+    - name: Alien 1_44
       rect:
         serializedVersion: 2
         x: 384
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1314,11 +1016,11 @@ TextureImporter:
         - {x: -13, y: -8}
         - {x: -11, y: -9}
         - {x: 14, y: -9}
-    - name: Alien 1_61
+    - name: Alien 1_45
       rect:
         serializedVersion: 2
         x: 416
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1337,11 +1039,11 @@ TextureImporter:
         - {x: 10, y: -10}
         - {x: 14, y: -8}
         - {x: 14, y: 2}
-    - name: Alien 1_62
+    - name: Alien 1_46
       rect:
         serializedVersion: 2
         x: 448
-        y: 128
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -1355,10 +1057,101 @@ TextureImporter:
         - {x: 11, y: -9}
         - {x: 14, y: -8}
         - {x: 14, y: 3}
-    - name: Alien 1_63
+    - name: Alien 1_47
       rect:
         serializedVersion: 2
         x: 480
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -3, y: 15}
+        - {x: -6, y: 12}
+        - {x: -13, y: 3}
+        - {x: -13, y: -8}
+        - {x: -11, y: -9}
+        - {x: 14, y: -9}
+        - {x: 14, y: 3}
+        - {x: 5, y: 15}
+    - name: Alien 1_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: 15}
+        - {x: -13, y: 6}
+        - {x: -13, y: -8}
+        - {x: 13, y: -8}
+        - {x: 14, y: -5}
+        - {x: 14, y: 5}
+        - {x: 5, y: 15}
+    - name: Alien 1_49
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: 15}
+        - {x: -13, y: 6}
+        - {x: -13, y: -8}
+        - {x: 13, y: -8}
+        - {x: 14, y: -5}
+        - {x: 14, y: 5}
+        - {x: 5, y: 15}
+    - name: Alien 1_50
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: 15}
+        - {x: -13, y: 6}
+        - {x: -13, y: -8}
+        - {x: 13, y: -8}
+        - {x: 14, y: -5}
+        - {x: 14, y: 5}
+        - {x: 5, y: 15}
+    - name: Alien 1_51
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: 15}
+        - {x: -13, y: 6}
+        - {x: -13, y: -8}
+        - {x: 13, y: -8}
+        - {x: 14, y: -5}
+        - {x: 14, y: 5}
+        - {x: 5, y: 15}
+    - name: Alien 1_52
+      rect:
+        serializedVersion: 2
+        x: 128
         y: 128
         width: 32
         height: 32
@@ -1374,102 +1167,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 3}
         - {x: 5, y: 15}
-    - name: Alien 1_64
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -5, y: 15}
-        - {x: -13, y: 6}
-        - {x: -13, y: -8}
-        - {x: 13, y: -8}
-        - {x: 14, y: -5}
-        - {x: 14, y: 5}
-        - {x: 5, y: 15}
-    - name: Alien 1_65
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -5, y: 15}
-        - {x: -13, y: 6}
-        - {x: -13, y: -8}
-        - {x: 13, y: -8}
-        - {x: 14, y: -5}
-        - {x: 14, y: 5}
-        - {x: 5, y: 15}
-    - name: Alien 1_66
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -5, y: 15}
-        - {x: -13, y: 6}
-        - {x: -13, y: -8}
-        - {x: 13, y: -8}
-        - {x: 14, y: -5}
-        - {x: 14, y: 5}
-        - {x: 5, y: 15}
-    - name: Alien 1_67
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -5, y: 15}
-        - {x: -13, y: 6}
-        - {x: -13, y: -8}
-        - {x: 13, y: -8}
-        - {x: 14, y: -5}
-        - {x: 14, y: 5}
-        - {x: 5, y: 15}
-    - name: Alien 1_68
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -3, y: 15}
-        - {x: -6, y: 12}
-        - {x: -13, y: 3}
-        - {x: -13, y: -8}
-        - {x: -11, y: -9}
-        - {x: 14, y: -9}
-        - {x: 14, y: 3}
-        - {x: 5, y: 15}
-    - name: Alien 1_69
+    - name: Alien 1_53
       rect:
         serializedVersion: 2
         x: 160
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1484,11 +1186,11 @@ TextureImporter:
         - {x: 11, y: -10}
         - {x: 14, y: -9}
         - {x: 14, y: 2}
-    - name: Alien 1_70
+    - name: Alien 1_54
       rect:
         serializedVersion: 2
         x: 192
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1507,11 +1209,11 @@ TextureImporter:
         - {x: -8, y: -8}
         - {x: -8, y: -5}
         - {x: -8, y: -7}
-    - name: Alien 1_71
+    - name: Alien 1_55
       rect:
         serializedVersion: 2
         x: 224
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1524,11 +1226,11 @@ TextureImporter:
         - {x: -15, y: -3}
         - {x: -15, y: -12}
         - {x: 16, y: -12}
-    - name: Alien 1_72
+    - name: Alien 1_56
       rect:
         serializedVersion: 2
         x: 256
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1542,11 +1244,11 @@ TextureImporter:
         - {x: 7, y: -9}
         - {x: 14, y: -4}
         - {x: 14, y: 3}
-    - name: Alien 1_73
+    - name: Alien 1_57
       rect:
         serializedVersion: 2
         x: 288
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1560,11 +1262,11 @@ TextureImporter:
         - {x: 7, y: -9}
         - {x: 14, y: -5}
         - {x: 14, y: 2}
-    - name: Alien 1_74
+    - name: Alien 1_58
       rect:
         serializedVersion: 2
         x: 320
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1578,11 +1280,11 @@ TextureImporter:
         - {x: 14, y: -2}
         - {x: 14, y: 6}
         - {x: 9, y: 8}
-    - name: Alien 1_75
+    - name: Alien 1_59
       rect:
         serializedVersion: 2
         x: 352
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1596,11 +1298,11 @@ TextureImporter:
         - {x: 14, y: -2}
         - {x: 14, y: 5}
         - {x: 12, y: 11}
-    - name: Alien 1_76
+    - name: Alien 1_60
       rect:
         serializedVersion: 2
         x: 384
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1615,11 +1317,11 @@ TextureImporter:
         - {x: 7, y: -7}
         - {x: 14, y: 0}
         - {x: 14, y: 5}
-    - name: Alien 1_77
+    - name: Alien 1_61
       rect:
         serializedVersion: 2
         x: 416
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1634,11 +1336,11 @@ TextureImporter:
         - {x: 7, y: -7}
         - {x: 14, y: 0}
         - {x: 14, y: 5}
-    - name: Alien 1_78
+    - name: Alien 1_62
       rect:
         serializedVersion: 2
         x: 448
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1653,11 +1355,11 @@ TextureImporter:
         - {x: 7, y: -7}
         - {x: 14, y: 0}
         - {x: 14, y: 5}
-    - name: Alien 1_79
+    - name: Alien 1_63
       rect:
         serializedVersion: 2
         x: 480
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -1672,11 +1374,11 @@ TextureImporter:
         - {x: 7, y: -7}
         - {x: 14, y: 0}
         - {x: 14, y: 5}
-    - name: Alien 1_80
+    - name: Alien 1_64
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1690,11 +1392,11 @@ TextureImporter:
         - {x: 14, y: -4}
         - {x: 14, y: 6}
         - {x: 12, y: 11}
-    - name: Alien 1_81
+    - name: Alien 1_65
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1710,11 +1412,11 @@ TextureImporter:
         - {x: 15, y: -4}
         - {x: 15, y: 2}
         - {x: 11, y: 8}
-    - name: Alien 1_82
+    - name: Alien 1_66
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1729,11 +1431,11 @@ TextureImporter:
         - {x: 16, y: -5}
         - {x: 16, y: 1}
         - {x: 14, y: 7}
-    - name: Alien 1_83
+    - name: Alien 1_67
       rect:
         serializedVersion: 2
         x: 96
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1747,11 +1449,11 @@ TextureImporter:
         - {x: 16, y: -8}
         - {x: 16, y: 2}
         - {x: 15, y: 6}
-    - name: Alien 1_84
+    - name: Alien 1_68
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1765,11 +1467,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 3}
         - {x: 11, y: 7}
-    - name: Alien 1_85
+    - name: Alien 1_69
       rect:
         serializedVersion: 2
         x: 160
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1783,11 +1485,11 @@ TextureImporter:
         - {x: 14, y: -9}
         - {x: 14, y: 5}
         - {x: 10, y: 6}
-    - name: Alien 1_86
+    - name: Alien 1_70
       rect:
         serializedVersion: 2
         x: 192
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1802,11 +1504,11 @@ TextureImporter:
         - {x: -9, y: -9}
         - {x: 12, y: -9}
         - {x: 14, y: -7}
-    - name: Alien 1_87
+    - name: Alien 1_71
       rect:
         serializedVersion: 2
         x: 224
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1821,11 +1523,11 @@ TextureImporter:
         - {x: 15, y: -3}
         - {x: 14, y: 7}
         - {x: 9, y: 11}
-    - name: Alien 1_88
+    - name: Alien 1_72
       rect:
         serializedVersion: 2
         x: 256
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1839,11 +1541,11 @@ TextureImporter:
         - {x: 16, y: -7}
         - {x: 16, y: 8}
         - {x: 10, y: 11}
-    - name: Alien 1_89
+    - name: Alien 1_73
       rect:
         serializedVersion: 2
         x: 288
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1857,11 +1559,11 @@ TextureImporter:
         - {x: 16, y: -7}
         - {x: 16, y: 8}
         - {x: 10, y: 11}
-    - name: Alien 1_90
+    - name: Alien 1_74
       rect:
         serializedVersion: 2
         x: 320
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1875,11 +1577,11 @@ TextureImporter:
         - {x: 16, y: -7}
         - {x: 16, y: 8}
         - {x: 10, y: 11}
-    - name: Alien 1_91
+    - name: Alien 1_75
       rect:
         serializedVersion: 2
         x: 352
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1893,11 +1595,11 @@ TextureImporter:
         - {x: 16, y: -7}
         - {x: 16, y: 8}
         - {x: 10, y: 11}
-    - name: Alien 1_92
+    - name: Alien 1_76
       rect:
         serializedVersion: 2
         x: 384
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1911,11 +1613,11 @@ TextureImporter:
         - {x: 15, y: -7}
         - {x: 15, y: 9}
         - {x: 10, y: 11}
-    - name: Alien 1_93
+    - name: Alien 1_77
       rect:
         serializedVersion: 2
         x: 416
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1930,11 +1632,11 @@ TextureImporter:
         - {x: -7, y: -8}
         - {x: 10, y: -8}
         - {x: 14, y: -4}
-    - name: Alien 1_94
+    - name: Alien 1_78
       rect:
         serializedVersion: 2
         x: 448
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1950,11 +1652,11 @@ TextureImporter:
         - {x: 13, y: -9}
         - {x: 13, y: 6}
         - {x: 11, y: 7}
-    - name: Alien 1_95
+    - name: Alien 1_79
       rect:
         serializedVersion: 2
         x: 480
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -1971,6 +1673,304 @@ TextureImporter:
         - {x: 11, y: -9}
         - {x: 11, y: 2}
         - {x: 7, y: 5}
+    - name: Alien 1_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11, y: -12}
+        - {x: 13, y: -13}
+        - {x: 14, y: -13}
+        - {x: 15, y: -10}
+        - {x: 15, y: 5}
+        - {x: 9, y: 9}
+        - {x: -6, y: 9}
+        - {x: -11, y: 8}
+        - {x: -14, y: 3}
+        - {x: -14, y: -13}
+        - {x: 6, y: -13}
+        - {x: 7, y: -9}
+        - {x: 7, y: -7}
+        - {x: 7, y: -9}
+    - name: Alien 1_81
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11, y: 11}
+        - {x: -9, y: 11}
+        - {x: -15, y: 7}
+        - {x: -15, y: -11}
+        - {x: -11, y: -13}
+        - {x: 9, y: -13}
+        - {x: 16, y: -12}
+        - {x: 16, y: 5}
+    - name: Alien 1_82
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: 9}
+        - {x: -16, y: 3}
+        - {x: -16, y: -9}
+        - {x: -13, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 9}
+    - name: Alien 1_83
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 9}
+        - {x: -16, y: 4}
+        - {x: -16, y: -15}
+        - {x: -15, y: -16}
+        - {x: 15, y: -16}
+        - {x: 16, y: -14}
+        - {x: 16, y: 6}
+        - {x: 13, y: 9}
+    - name: Alien 1_84
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 8}
+        - {x: -9, y: 7}
+        - {x: -13, y: 4}
+        - {x: -13, y: -12}
+        - {x: -10, y: -13}
+        - {x: 9, y: -13}
+        - {x: 14, y: -9}
+        - {x: 14, y: 2}
+        - {x: 7, y: 8}
+    - name: Alien 1_85
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: 9}
+        - {x: -14, y: -11}
+        - {x: -11, y: -13}
+        - {x: 7, y: -13}
+        - {x: 16, y: -10}
+        - {x: 16, y: -1}
+        - {x: 13, y: 9}
+    - name: Alien 1_86
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 8}
+        - {x: -16, y: 8}
+    - name: Alien 1_87
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -3, y: 8}
+        - {x: -15, y: 5}
+        - {x: -16, y: 3}
+        - {x: -16, y: -15}
+        - {x: -15, y: -16}
+        - {x: 15, y: -16}
+        - {x: 16, y: -15}
+        - {x: 16, y: 1}
+        - {x: 7, y: 8}
+    - name: Alien 1_88
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 5}
+        - {x: -12, y: 5}
+        - {x: -15, y: -1}
+        - {x: -15, y: -9}
+        - {x: 11, y: -9}
+        - {x: 14, y: -5}
+        - {x: 14, y: -1}
+        - {x: 10, y: 3}
+    - name: Alien 1_89
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: 8}
+        - {x: -15, y: 7}
+        - {x: -16, y: -1}
+        - {x: -16, y: -9}
+        - {x: -10, y: -10}
+        - {x: 6, y: -10}
+        - {x: 16, y: -8}
+        - {x: 16, y: 2}
+        - {x: 15, y: 8}
+    - name: Alien 1_90
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 7}
+        - {x: -16, y: -14}
+        - {x: 9, y: -14}
+        - {x: 16, y: -10}
+        - {x: 16, y: 6}
+        - {x: 13, y: 7}
+    - name: Alien 1_91
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 5}
+        - {x: -16, y: 3}
+        - {x: -16, y: -14}
+        - {x: -15, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 3}
+        - {x: 15, y: 5}
+    - name: Alien 1_92
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 10, y: 5}
+        - {x: -10, y: 5}
+        - {x: -14, y: 1}
+        - {x: -14, y: -6}
+        - {x: -10, y: -9}
+        - {x: 13, y: -9}
+        - {x: 15, y: -6}
+        - {x: 15, y: 3}
+    - name: Alien 1_93
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: 8}
+        - {x: -15, y: 6}
+        - {x: -16, y: 5}
+        - {x: -16, y: -8}
+        - {x: -13, y: -10}
+        - {x: 16, y: -10}
+        - {x: 16, y: 6}
+        - {x: 11, y: 8}
+    - name: Alien 1_94
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 7}
+        - {x: -16, y: -12}
+        - {x: -9, y: -14}
+        - {x: 15, y: -14}
+        - {x: 16, y: -12}
+        - {x: 16, y: 7}
+    - name: Alien 1_95
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 5}
+        - {x: -16, y: -13}
+        - {x: -15, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 5}
     outline: []
   spritePackingTag: 
   userData: 
