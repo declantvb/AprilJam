@@ -75,8 +75,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSpeed: 2
-  Target: {fileID: 0}
+  PathFindTargetPos: {x: 0, y: 0, z: 0}
+  health: 100
   nextWaypointDistance: 0.3
+  targetRepathDistanceTolerance: 1
+  MinTimeBetweenRepath: 0.2
+  TargetDetectionRange: 5
+  PatrolWaitMin: 0.5
+  PatrolWaitMax: 1.5
+  NextPatrolTargetMaxDistance: 3
+  MaxTimePatrollingOnePath: 4
+  patrolWaitElapsed: 0
+  patrolTravelElapsed: 0
+  nextPatrolWaitTime: 0
+  distanceToPatrolTarget: 0
+  State: 0
 --- !u!114 &11474574
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,48 +3,55 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
-using System;
 
 public class Enemy : MonoBehaviour
 {
 	[Header("Movement")]
     [SerializeField] float MaxSpeed = 10f;
-    [SerializeField] Transform Target;
+    [SerializeField] Vector3 PathFindTargetPos;
 
-	[Header("Combat")]
-	public float health;
+    [Header("Combat")]
+    public float health = 100f;
 	
     [Header("Pathfinding")]
-	Rigidbody2D rb;
-    Seeker seeker;
     [SerializeField] float nextWaypointDistance = 1;                //The max distance from the AI to a waypoint for it to continue to the next waypoint
     [SerializeField] float targetRepathDistanceTolerance = 1f;      //Recalculate path if target moves more than this from the end of the current path
+    [SerializeField] float MinTimeBetweenRepath = 0.2f;  
+    float timeSinceRepath;
+    [SerializeField] float TargetDetectionRange = 5f;               //If a player enters this radius, enemy will hunt them forever
 
-    [Header("Swarm Behaviour")]
-    [SerializeField] float SwarmNeighbourRadius = 3f;
-    [SerializeField] float WeightAlignment = 0.5f;
-    [SerializeField] float WeightCohesion = 0.25f;
-    [SerializeField] float WeightSeparation = 0.25f;
+    [Header("Patrolling")]
+    [SerializeField] float PatrolWaitMin = 1f;                      //How long to wait when reached patrol target before heading for new random position
+    [SerializeField] float PatrolWaitMax = 4f;
+    [SerializeField] float NextPatrolTargetMaxDistance = 4f;        //Max distance allowed when randomly choosing a new patrol target
+    [SerializeField] float MaxTimePatrollingOnePath = 5f;           //If enemy spends longer than this patrolling current path without reaching end, generate a new patrol target.  
 
-    int currentWaypoint = 0;            //The waypoint we are currently moving towards
-    Path currentPath;
+    [SerializeField] float patrolWaitElapsed;
+    [SerializeField] float patrolTravelElapsed;
+    [SerializeField] float nextPatrolWaitTime;
+    [SerializeField] float distanceToPatrolTarget;
 
-    float repathRate = 3f;
-    float repathElapsed;
+    [Header("Misc")]
+    public EnemyState State = EnemyState.PatrolWait;
+    EnemyState lastState = EnemyState.PatrolWait;
+
+    int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
+    Path currentPath;    
     bool calculatingPath;
 
+    Rigidbody2D rb;
+    Seeker seeker;
     Vector3 moveDir;
 
 	void Start()
     {
-		health = 100f;
         rb = GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
     }
 
 	void Update()
     {
-        repathElapsed += Time.deltaTime;
+        timeSinceRepath += Time.deltaTime;
 
 		if (health <= 0)
 		{
@@ -56,66 +63,119 @@ public class Enemy : MonoBehaviour
 
         //Move along path towards target
         UpdateMovement();
+
+        lastState = State;
     }
        
     void FindNewTarget()
     {
-        //Find closest player and target them
-        List<PlayerController> possibleTargets = FindObjectsOfType<PlayerController>().ToList();
-        float closestDistance = float.MaxValue;
-        PlayerController closestPlayer = null;
+        //Find closest player within attack range and target them
+        List<PlayerController> possibleTargetsWithinRange = FindObjectsOfType<PlayerController>().Where(p => Vector3.Distance(p.transform.position, transform.position) < TargetDetectionRange).ToList();
 
-        foreach (PlayerController player in possibleTargets)
+        if (possibleTargetsWithinRange.Count > 0)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            if (distanceToPlayer < closestDistance)
+            float closestDistance = float.MaxValue;
+            PlayerController closestPlayer = null;
+
+            foreach (PlayerController player in possibleTargetsWithinRange)
             {
-                closestDistance = distanceToPlayer;
-                closestPlayer = player;
+                float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+                if (distanceToPlayer < closestDistance)
+                {
+                    closestDistance = distanceToPlayer;
+                    closestPlayer = player;
+                }
+            }
+            PathFindTargetPos = closestPlayer.transform.position;
+
+            //Calculate distance from last target position        
+            float targetMoveDistance = float.MaxValue;
+
+            if (currentPath != null)
+            {
+                targetMoveDistance = Vector3.Distance(PathFindTargetPos, currentPath.vectorPath[currentPath.vectorPath.Count - 1]);
+            }
+
+            if (!calculatingPath && targetMoveDistance > targetRepathDistanceTolerance && timeSinceRepath >= MinTimeBetweenRepath)
+            {
+                seeker.StartPath(transform.position, PathFindTargetPos, OnPathFound);
+                calculatingPath = true;
+            }
+
+            State = EnemyState.ChasingTarget;
+        }
+        else
+        {
+            //If enemy was previously chasing a target player, but has lost sight of them, return to patrolling
+            if (lastState == EnemyState.ChasingTarget)
+            {
+                State = EnemyState.PatrolWait;
+
+                //Generate new time to wait
+                nextPatrolWaitTime = Random.Range(PatrolWaitMin, PatrolWaitMax);
+                patrolWaitElapsed = 0;
             }
         }
-        Target = closestPlayer.transform;
 
-        //Calculate distance from last target position        
-        float targetMoveDistance = float.MaxValue;
-
-        if (currentPath != null)
+        //There were no players found within attack range. Continue patrolling
+        if (State == EnemyState.PatrolWait)
         {
-            targetMoveDistance = Vector3.Distance(Target.position, currentPath.vectorPath[currentPath.vectorPath.Count - 1]); 
+            //Randomly generate new position to patrol to when enough waiting time has elapsed
+            patrolWaitElapsed += Time.deltaTime;
+            if (patrolWaitElapsed >= nextPatrolWaitTime)
+            {
+                patrolWaitElapsed = 0;
+
+                //Enemy has finished waiting. Begin moving
+                State = EnemyState.PatrolMove;
+
+                //Calculate next patrol target
+                PathFindTargetPos = transform.position + new Vector3(Random.Range(-NextPatrolTargetMaxDistance, NextPatrolTargetMaxDistance), Random.Range(-NextPatrolTargetMaxDistance, NextPatrolTargetMaxDistance), 0);
+
+                //Set off on new path
+                seeker.StartPath(transform.position, PathFindTargetPos, OnPathFound);
+                calculatingPath = true;
+            }
         }
-        
-        if (!calculatingPath && targetMoveDistance > targetRepathDistanceTolerance)
+        if (State == EnemyState.PatrolMove)
         {
-            print("Recalculatin' path! " + targetMoveDistance);
-            seeker.StartPath(transform.position, Target.transform.position, OnPathFound);
-            calculatingPath = true;
-        }        
+            patrolTravelElapsed += Time.deltaTime;
+
+            //If enemy has been patrolling this path for too long, or has reached end of patrol path, enter PatrolWait state
+            distanceToPatrolTarget = Vector3.Distance(transform.position, PathFindTargetPos);
+            if (patrolTravelElapsed >= MaxTimePatrollingOnePath || distanceToPatrolTarget < 0.3f)           //Hardcoded max distance!!!!!
+            {
+                patrolTravelElapsed = 0;
+
+                //Generate new time to wait
+                nextPatrolWaitTime = Random.Range(PatrolWaitMin, PatrolWaitMax);
+
+                State = EnemyState.PatrolWait;
+            }
+        }
+
     }
 
     void UpdateMovement()
-    {
-        //Recalculate move direction (combination of heading towards attack target, and obeying the swarm motion)     
-        //moveDir = CalculateSwarmAgentMovementDirection();
-
-
-        if (currentPath == null || Target == null)
+    {        
+        if (currentPath == null || PathFindTargetPos == null)
         {
             return;
         }
 
         //Check if enemy has reached end of it's path
-        if (currentWaypoint >= currentPath.vectorPath.Count)
+        if (currentWaypointIndex >= currentPath.vectorPath.Count)
         {
             return;
         }
 
         //Check if we are close enough to the next waypoint
         //If we are, proceed to follow the next waypoint
-        while (Vector3.Distance(transform.position, currentPath.vectorPath[currentWaypoint]) < nextWaypointDistance)
+        while (Vector3.Distance(transform.position, currentPath.vectorPath[currentWaypointIndex]) < nextWaypointDistance)
         {
-            currentWaypoint++;
+            currentWaypointIndex++;
 
-            if (currentWaypoint >= currentPath.vectorPath.Count)
+            if (currentWaypointIndex >= currentPath.vectorPath.Count)
             {
                 currentPath = null;
                 return;
@@ -123,7 +183,7 @@ public class Enemy : MonoBehaviour
         }
 
         //Get direction to the next waypoint and move towards it
-        moveDir = (currentPath.vectorPath[currentWaypoint] - transform.position).normalized;      
+        moveDir = (currentPath.vectorPath[currentWaypointIndex] - transform.position).normalized;
         rb.MovePosition(transform.position + moveDir * MaxSpeed * Time.deltaTime);        
     }
 
@@ -134,7 +194,7 @@ public class Enemy : MonoBehaviour
         if (!p.error)
         {
             currentPath = p;
-            currentWaypoint = 0;        //Reset the waypoint counter
+            currentWaypointIndex = 0;        //Reset the waypoint counter
         }
         else
         {
@@ -142,39 +202,19 @@ public class Enemy : MonoBehaviour
         }
 
         calculatingPath = false;
+        timeSinceRepath = 0;
     }
-
-    Vector3 CalculateSwarmAgentMovementDirection()
-    {
-        Vector3 Alignment = Vector3.zero;
-        Vector3 Cohesion = Vector3.zero;
-        Vector3 Separation = Vector3.zero;
-
-        List<Enemy> neighbours = Physics.OverlapSphere(transform.position, SwarmNeighbourRadius).Where(n => n.GetComponent<Enemy>() != null).Select(n => n.GetComponent<Enemy>()).ToList();
-
-        if (neighbours.Count() == 0)
-        {
-            return Vector3.zero;
-        }
-
-        //For each neighbouring enemy, calculate swarm behaviour values
-        foreach (Enemy enemy in neighbours)
-        {
-            Alignment += enemy.GetComponent<Rigidbody>().velocity;
-            Cohesion += enemy.transform.position;
-            Separation += enemy.transform.position - transform.position;
-        }
-
-        //Divide the computation vectors by the neighbor count and normalize them
-        Alignment = (Alignment / neighbours.Count).normalized * WeightAlignment;
-        Cohesion = (Cohesion / neighbours.Count).normalized * WeightCohesion;
-        Separation = (Separation / neighbours.Count).normalized * WeightSeparation;
-
-        return Alignment + Cohesion + Separation;
-	}
-
+   
 	internal void Hit(float damage)
 	{
 		health -= damage;
 	}
+
+    public enum EnemyState
+    {
+        PatrolWait,
+        PatrolMove,
+        ChasingTarget,
+        Attacking
+    }
 }

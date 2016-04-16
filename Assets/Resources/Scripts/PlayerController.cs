@@ -4,8 +4,8 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-	[Header("Combat")]
-	public float health;
+    [Header("Combat")]
+    public float health = 100f;
 
 	public string horizontalAxis = "Horizontal";
 	public string verticalAxis = "Vertical";
@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		health = 100f;
 		shootCooldown = 0f;
 		rigidbodys = GetComponent<Rigidbody2D>();
 	}
