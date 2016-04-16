@@ -3,7 +3,7 @@
  <image source="../Textures/Tiles/MetalBaseTiles.png" width="608" height="32"/>
  <tile id="0">
   <properties>
-   <property name="z" type="int" value="-1000000"/>
+   <property name="z" type="int" value="-1000010"/>
   </properties>
  </tile>
  <tile id="1">
