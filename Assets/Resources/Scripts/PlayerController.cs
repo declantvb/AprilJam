@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
+	[Header("Combat")]
+	public float health;
+
 	public string horizontalAxis = "Horizontal";
 	public string verticalAxis = "Vertical";
 	public float speed = 1.0f;
@@ -15,11 +19,14 @@ public class PlayerController : MonoBehaviour
 	public bool joystickShooting = true;
 	public float shootDelay = 1f;
 	private float shootCooldown = 0f;
+
 	private Rigidbody2D rigidbodys;
+	public float bulletSpeed;
 
 	// Use this for initialization
 	void Start()
 	{
+		health = 100f;
 		shootCooldown = 0f;
 		rigidbodys = GetComponent<Rigidbody2D>();
 	}
@@ -27,6 +34,11 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (health <= 0)
+		{
+			Destroy(gameObject);
+		}
+
 		//move
 		var targetVelocity = (Vector2.right * Input.GetAxis(horizontalAxis) + Vector2.up * Input.GetAxis(verticalAxis)).normalized * speed;
 		var delta = targetVelocity - rigidbodys.velocity;
@@ -55,11 +67,17 @@ public class PlayerController : MonoBehaviour
 
 			if (shootCooldown < 0f && (joystickShooting || Input.GetAxis(shootAxis) > 0))
 			{
-				var newBullet = Instantiate(bulletPrefab, bulletStart.transform.position, transform.rotation);
-
+				var newBullet = (GameObject)Instantiate(bulletPrefab, bulletStart.transform.position, transform.rotation);
+				newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.up * bulletSpeed, ForceMode2D.Impulse);
+				
 				shootCooldown = shootDelay;
 			}
 		}
 		shootCooldown -= Time.deltaTime;
+	}
+
+	internal void Hit(float damage)
+	{
+		health -= damage;
 	}
 }

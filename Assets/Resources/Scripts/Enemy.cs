@@ -3,27 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
+using System;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Movement")]
+	[Header("Movement")]
     [SerializeField] float MaxSpeed = 10f;
     [SerializeField] Transform Target;
-     
-    Rigidbody2D rb;
+
+	[Header("Combat")]
+	public float health;
+
+	Rigidbody2D rb;
     Seeker seeker;
     float nextWaypointDistance = 3;     //The max distance from the AI to a waypoint for it to continue to the next waypoint
     int currentWaypoint = 0;            //The waypoint we are currently moving towards
     Path currentPath;
 
-    void Start()
+	void Start()
     {
+		health = 100f;
         rb = GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
     }
 
-    void Update()
+	void Update()
     {
+		if (health <= 0)
+		{
+			Destroy(gameObject);
+		}
+
         //Find target  
         if (Target == null)
         {
@@ -73,5 +83,10 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Enemy had path error: " + p.error);
         }
-    }
+	}
+
+	internal void Hit(float damage)
+	{
+		health -= damage;
+	}
 }

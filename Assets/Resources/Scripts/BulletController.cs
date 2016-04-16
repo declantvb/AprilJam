@@ -5,6 +5,7 @@ public class BulletController : MonoBehaviour
 {
 	public float TimeToLive = 5f;
 	private float ttl;
+	public float damage;
 
 	// Use this for initialization
 	void Start()
@@ -15,8 +16,6 @@ public class BulletController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		transform.position = transform.position + transform.up;
-
 		ttl -= Time.deltaTime;
 		if (ttl < 0)
 		{
@@ -31,13 +30,13 @@ public class BulletController : MonoBehaviour
 		var player = other.GetComponent<PlayerController>();
 		if (player != null)
 		{
-			//hit
+			player.Hit(damage);
 		}
 		
 		var enemy = other.GetComponent<Enemy>();
 		if (enemy != null)
 		{
-			//hit
+			enemy.Hit(damage);
 		}
 
 		Destroy(gameObject);
