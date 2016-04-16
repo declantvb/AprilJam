@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5057082}
   - 61: {fileID: 6157676}
   - 114: {fileID: 11439478}
+  - 114: {fileID: 11483632}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -73,6 +74,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b7bba0554f8364a8e595ff2675cc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxSpeed: 10
+  Target: {fileID: 0}
+--- !u!114 &11483632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 192802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  traversableTagsCompatibility:
+    tagsChange: -1
+    tagsSet: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!212 &21295944
 SpriteRenderer:
   m_ObjectHideFlags: 1
