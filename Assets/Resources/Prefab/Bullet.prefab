@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeToLive: 5
   damage: 10
+  knockbackForce: 250
 --- !u!212 &21252986
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -28,8 +28,8 @@ GameObject:
   - 50: {fileID: 5057082}
   - 58: {fileID: 5816284}
   - 114: {fileID: 11474574}
-  - 114: {fileID: 11439478}
   - 114: {fileID: 11424050}
+  - 114: {fileID: 11439478}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -71,7 +71,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 192802}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
@@ -157,9 +157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b7bba0554f8364a8e595ff2675cc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 2
+  MoveSpeed_Chasing: 6
+  MoveSpeed_Patrol: 1
   PathFindTargetPos: {x: 0, y: 0, z: 0}
   health: 100
+  AttackRange: 1
+  AttackCooldown: 1
+  AttackDamage: 10
   nextWaypointDistance: 0.3
   targetRepathDistanceTolerance: 1
   MinTimeBetweenRepath: 0.2
@@ -173,6 +177,9 @@ MonoBehaviour:
   nextPatrolWaitTime: 0
   distanceToPatrolTarget: 0
   State: 0
+  Sprite: {fileID: 0}
+  DamageRedFlashDuration: 0.2
+  DamageStunTime: 0.5
 --- !u!114 &11474574
 MonoBehaviour:
   m_ObjectHideFlags: 1

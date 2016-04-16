@@ -197,6 +197,8 @@ MonoBehaviour:
   SwitchingWeapon: 0
   joystickShooting: 0
   bulletSpeed: 5
+  PlayerSprite: {fileID: 21241770}
+  DamageRedFlashDuration: 0.2
   Weapons:
   - BulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
     Type: 0

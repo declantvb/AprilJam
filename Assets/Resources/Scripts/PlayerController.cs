@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D rigidbodys;
 	public float bulletSpeed;
 
+    [Header("Graphics")]
+    [SerializeField] SpriteRenderer PlayerSprite;
+    [SerializeField] float DamageRedFlashDuration = 0.2f;
+
 	public WeaponDescription[] Weapons = new WeaponDescription[0];
 	public int currentWeaponIndex = 0;
 	[SerializeField]
@@ -34,7 +38,7 @@ public class PlayerController : MonoBehaviour
 	{
 		shootCooldown = 0f;
 		rigidbodys = GetComponent<Rigidbody2D>();
-	}
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -136,5 +140,34 @@ public class PlayerController : MonoBehaviour
 	internal void Hit(float damage)
 	{
 		health -= damage;
+        StartCoroutine(FlashRed(DamageRedFlashDuration));
 	}
+
+    IEnumerator FlashRed(float duration)
+    {
+        float elapsed = 0;
+        Color startColor = new Color(1, 1, 1);
+        Color endColor = new Color(1, 0, 0);
+        float t = 0;
+
+        do
+        {
+            elapsed += Time.deltaTime;           
+            t = elapsed / duration;
+
+            if (t < 0.5f)
+            {
+                PlayerSprite.color = Color.Lerp(startColor, endColor, t * 2f);
+            }
+            else
+            {
+                PlayerSprite.color = Color.Lerp(endColor, startColor, t * 2f);
+            }
+
+            yield return null;
+        }
+        while (t < 1f);
+
+        PlayerSprite.color = startColor;
+    }
 }
