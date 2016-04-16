@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour
 	public string verticalAxis = "Vertical";
 	public float speed = 1.0f;
 
-	public GameObject bullet;
+	public GameObject bulletPrefab;
+	public GameObject bulletStart;
 	public string horizontal2Axis = "Horizontal2";
 	public string vertical2Axis = "Vertical2";
+	private const string shootAxis = "Fire1";
+	public bool joystickShooting = true;
 	public float shootDelay = 1f;
 	private float shootCooldown = 0f;
 	private Rigidbody2D rigidbodys;
@@ -35,8 +38,12 @@ public class PlayerController : MonoBehaviour
 
 		if (shootDirection.sqrMagnitude == 0.0f)
 		{
+			joystickShooting = false;
 			var mousePos = Input.mousePosition;
 			shootDirection = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		} else
+		{
+			joystickShooting = true;
 		}
 
 		if (shootDirection.sqrMagnitude > 0.0f)
@@ -46,12 +53,13 @@ public class PlayerController : MonoBehaviour
 			rot.y = 0;
 			transform.rotation = rot;
 
-			if (shootCooldown < 0f)
+			if (shootCooldown < 0f && (joystickShooting || Input.GetAxis(shootAxis) > 0))
 			{
-				Instantiate(bullet, transform.position, transform.rotation);
+				var newBullet = Instantiate(bulletPrefab, bulletStart.transform.position, transform.rotation);
 
 				shootCooldown = shootDelay;
 			}
 		}
+		shootCooldown -= Time.deltaTime;
 	}
 }

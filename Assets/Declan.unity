@@ -143,6 +143,33 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &972175426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 972175427}
+  m_Layer: 0
+  m_Name: bullet_start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &972175427
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 972175426}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2028225601}
+  m_RootOrder: 2
 --- !u!1 &1251379393
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,9 +480,11 @@ MonoBehaviour:
   horizontalAxis: Horizontal
   verticalAxis: Vertical
   speed: 5
-  bullet: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
+  bulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
+  bulletStart: {fileID: 972175426}
   horizontal2Axis: Horizontal2
   vertical2Axis: Vertical2
+  joystickShooting: 0
   shootDelay: 0.1
 --- !u!58 &2028225600
 CircleCollider2D:
@@ -483,6 +512,7 @@ Transform:
   m_Children:
   - {fileID: 454502347}
   - {fileID: 1718692939}
+  - {fileID: 972175427}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!50 &2028225602
