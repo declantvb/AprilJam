@@ -35,16 +35,20 @@ public class TiledLevelImporterEditor : Editor
 
     private void CreateLevel(TiledLevel obj)
     {
+        zDepths = new Dictionary<int, int>();
+
+        // If any tilesets are remote references, go find those tilesets and load them
         FixTilesets(obj.tilesets, obj.path);
 
         var tileCount = obj.tilesets.Sum(t => t.tilecount) + 1;
         Sprite[] tileSprites = new Sprite[tileCount];
-        zDepths = new Dictionary<int, int>();
 
         int i = 0;
 
+        // Load tilesets
         foreach (var tileset in obj.tilesets)
         {
+            Debug.Log("Reading tileset...");
             var tilesetToUse = tileset;
 
             i = tilesetToUse.firstgid;
@@ -67,11 +71,17 @@ public class TiledLevelImporterEditor : Editor
                     tileSprites[i++] = sprite;
                 }
             }
+            else
+            {
+                Debug.LogError("Couldn't find sprites - " + tilesetToUse.image);
+            }
 
         }
         
         var importedLevel = new GameObject("Tiled Level");
 
+
+        // Load the layers
         foreach (var layer in obj.layers)
         {
             GameObject layerObj = new GameObject(layer.name);
@@ -92,10 +102,19 @@ public class TiledLevelImporterEditor : Editor
 
                     tile.transform.parent = layerObj.transform;
                     tile.transform.position = new Vector2(x, -y);
+                    tile.isStatic = true;
 
                     var renderer = tile.AddComponent<SpriteRenderer>();
                     renderer.sprite = tileSprites[spriteIndex];
                     renderer.sortingOrder = zDepths[spriteIndex];
+
+                    // Anything on layer 0 should have a collider
+                    if (zDepths[spriteIndex] == 0)
+                    {
+                        var collider = tile.AddComponent<BoxCollider2D>();
+                        collider.size = new Vector2(1, 1.4f);
+                        
+                    }
                 }
             }
         }
@@ -108,14 +127,13 @@ public class TiledLevelImporterEditor : Editor
             if (!string.IsNullOrEmpty(tilesets[i].source))
             {
                 var firstgid = tilesets[i].firstgid;
-                tilesets[i] = LoadTileset(Path.Combine(path, tilesets[i].source));
-                tilesets[i].firstgid = firstgid;
+                tilesets[i] = LoadTileset(Path.Combine(path, tilesets[i].source), firstgid);
             }
         }
 
     }
 
-    private Tileset LoadTileset(string source)
+    private Tileset LoadTileset(string source, int firstgid)
     {
         Debug.Log(source);
 
@@ -133,16 +151,20 @@ public class TiledLevelImporterEditor : Editor
         var tileNodes = xdoc.GetElementsByTagName("tile");
         foreach (XmlNode tileNode in tileNodes)
         {
-            var id = int.Parse(tileNode.Attributes.GetNamedItem("id").Value);
+            var id = int.Parse(tileNode.Attributes.GetNamedItem("id").Value) + firstgid;
             var zNode = tileNode["properties"].ChildNodes.Cast<XmlNode>().Where(x => x.Name == "property" && x.Attributes.GetNamedItem("name").Value == "z").FirstOrDefault();
             Debug.Log(zNode);
             if (zNode != null)
             {
                 Debug.Log(id);
+                Debug.Log(zDepths);
+                
                 zDepths.Add(id, int.Parse(zNode.Attributes.GetNamedItem("value").Value));
             }
 
         }
+
+        tileset.firstgid = firstgid;
 
         return tileset;
     }
