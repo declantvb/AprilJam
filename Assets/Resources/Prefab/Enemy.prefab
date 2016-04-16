@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &126616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 499900}
+  m_Layer: 0
+  m_Name: Animations
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &133172
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +48,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &174296
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 427102}
+  - 114: {fileID: 11448638}
+  m_Layer: 0
+  m_Name: Anim_Death
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &192802
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +78,7 @@ GameObject:
   - 114: {fileID: 11474574}
   - 114: {fileID: 11424050}
   - 114: {fileID: 11439478}
+  - 114: {fileID: 11478756}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -61,12 +93,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.59, y: 2.99, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: -3.5, y: 3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458370}
   - {fileID: 490194}
+  - {fileID: 499900}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &427102
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 499900}
   m_RootOrder: 0
 --- !u!4 &458370
 Transform:
@@ -92,6 +137,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 419544}
   m_RootOrder: 1
+--- !u!4 &499900
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 427102}
+  m_Father: {fileID: 419544}
+  m_RootOrder: 2
 --- !u!50 &5057082
 Rigidbody2D:
   serializedVersion: 2
@@ -176,6 +234,7 @@ MonoBehaviour:
   - {fileID: 21300038, guid: e654036c5f206064199f32952c83629e, type: 3}
   timePerFrame: 0.108
   animationPlayingForward: 0
+  isPlayer: 0
   speed: 1.5
 --- !u!114 &11439478
 MonoBehaviour:
@@ -212,6 +271,23 @@ MonoBehaviour:
   DamageRedFlashDuration: 0.2
   DamageStunTime: 0.5
   BloodParticles: {fileID: 19810198}
+--- !u!114 &11448638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ccbe53e4b6f544e9375cc3fc32ace4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  AnimationCells: []
+  FrameDelay: 0.2
+  currentFrame: 0
+  Playing: 0
+  OneShotting: 0
 --- !u!114 &11474574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +315,18 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &11478756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 192802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0949366396f87624e8195956257857f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentSortOrder: 0
 --- !u!198 &19810198
 ParticleSystem:
   m_ObjectHideFlags: 1
