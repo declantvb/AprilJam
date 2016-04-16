@@ -82,8 +82,10 @@ public class TiledLevelImporterEditor : Editor
 
 
         // Load the layers
-        foreach (var layer in obj.layers)
+        for (int layerId = obj.layers.Length - 1; layerId >= 0; layerId--)
         {
+            var layer = obj.layers[layerId];
+
             GameObject layerObj = new GameObject(layer.name);
             layerObj.transform.parent = importedLevel.transform;
 
