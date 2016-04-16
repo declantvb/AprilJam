@@ -6,9 +6,10 @@ public class BulletController : MonoBehaviour
 	public float TimeToLive = 5f;
 	private float ttl;
 	public float damage;
+    public float knockbackForce = 20f;
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
 	{
 		ttl = TimeToLive;
 	}
@@ -36,9 +37,8 @@ public class BulletController : MonoBehaviour
 		var enemy = other.GetComponent<Enemy>();
 		if (enemy != null)
 		{
-			enemy.Hit(damage);
+			enemy.Hit(damage, transform.up, knockbackForce);            
 		}
-
-		Destroy(gameObject);
+        Destroy(gameObject);
 	}
 }

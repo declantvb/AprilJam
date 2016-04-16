@@ -7,11 +7,16 @@ using Pathfinding;
 public class Enemy : MonoBehaviour
 {
 	[Header("Movement")]
-    [SerializeField] float MaxSpeed = 10f;
+    [SerializeField] float MoveSpeed_Chasing = 15f;   
+    [SerializeField] float MoveSpeed_Patrol = 10f;
     [SerializeField] Vector3 PathFindTargetPos;
 
     [Header("Combat")]
-    public float health = 100f;
+    [SerializeField] float health = 100f;
+    [SerializeField] float AttackRange = 1f;                        //If a player is within this range, they will be attacked
+    [SerializeField] float AttackCooldown = 1f;
+    [SerializeField] float AttackDamage = 10f;
+    float attackCooldownElapsed;
 	
     [Header("Pathfinding")]
     [SerializeField] float nextWaypointDistance = 1;                //The max distance from the AI to a waypoint for it to continue to the next waypoint
@@ -34,6 +39,10 @@ public class Enemy : MonoBehaviour
     [Header("Misc")]
     public EnemyState State = EnemyState.PatrolWait;
     EnemyState lastState = EnemyState.PatrolWait;
+    [SerializeField] SpriteRenderer Sprite;
+    [SerializeField] float DamageRedFlashDuration = 0.2f;
+    [SerializeField] float DamageStunTime = 0.5f;
+    float stuntimeElapsed;
 
     int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
     Path currentPath;    
@@ -47,6 +56,7 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
+        Sprite = GetComponent<SpriteRenderer>();
     }
 
 	void Update()
@@ -59,7 +69,7 @@ public class Enemy : MonoBehaviour
 		}
 
         //Find target  
-        FindNewTarget();
+        UpdateState();
 
         //Move along path towards target
         UpdateMovement();
@@ -67,8 +77,23 @@ public class Enemy : MonoBehaviour
         lastState = State;
     }
        
-    void FindNewTarget()
-    {
+    void UpdateState()
+    {      
+        //Move enemy unless it is stunned
+        if (State == EnemyState.Stunned)
+        {
+            stuntimeElapsed += Time.deltaTime;
+            if (stuntimeElapsed >= DamageStunTime)
+            {
+                stuntimeElapsed = 0;
+                State = EnemyState.PatrolWait;           //Return to patrolling after being stunned
+            }
+            else
+            {
+                return;
+            }
+        }
+
         //Find closest player within attack range and target them
         List<PlayerController> possibleTargetsWithinRange = FindObjectsOfType<PlayerController>().Where(p => Vector3.Distance(p.transform.position, transform.position) < TargetDetectionRange).ToList();
 
@@ -87,6 +112,14 @@ public class Enemy : MonoBehaviour
                 }
             }
             PathFindTargetPos = closestPlayer.transform.position;
+
+            //If a player is within range of being attacked, attack them
+            attackCooldownElapsed += Time.deltaTime;
+            if (attackCooldownElapsed >= AttackCooldown && closestDistance < AttackRange)
+            {
+                DoAttack(closestPlayer);
+                attackCooldownElapsed = 0;
+            }
 
             //Calculate distance from last target position        
             float targetMoveDistance = float.MaxValue;
@@ -153,7 +186,6 @@ public class Enemy : MonoBehaviour
                 State = EnemyState.PatrolWait;
             }
         }
-
     }
 
     void UpdateMovement()
@@ -184,7 +216,28 @@ public class Enemy : MonoBehaviour
 
         //Get direction to the next waypoint and move towards it
         moveDir = (currentPath.vectorPath[currentWaypointIndex] - transform.position).normalized;
-        rb.MovePosition(transform.position + moveDir * MaxSpeed * Time.deltaTime);        
+
+        float moveSpeed = 0;
+        if (State == EnemyState.PatrolMove)
+        {
+            moveSpeed = MoveSpeed_Patrol;
+        }
+        else if (State == EnemyState.ChasingTarget)
+        {
+            moveSpeed = MoveSpeed_Chasing;
+        }
+
+        //Move enemy unless it is stunned
+        if (State != EnemyState.Stunned)
+        {
+            Vector3 Vf = moveDir * moveSpeed;
+            Vector3 Vi = rb.velocity;
+
+            Vector3 F = (rb.mass * (Vf - Vi)) / 0.05f;               //EUREKA!!!
+            rb.AddForce(F, ForceMode2D.Force);
+
+            //rb.MovePosition(transform.position + moveDir * moveSpeed * Time.deltaTime);
+        }   
     }
 
     void OnPathFound(Path p)
@@ -205,16 +258,62 @@ public class Enemy : MonoBehaviour
         timeSinceRepath = 0;
     }
    
-	internal void Hit(float damage)
+	internal void Hit(float damage, Vector3 hitDirection, float hitForce)
 	{
 		health -= damage;
-	}
+        StartCoroutine(FlashRed(DamageRedFlashDuration));
+
+        //Stun this enemy temporarily. This will allow knockback
+        State = EnemyState.Stunned;
+
+        //Apply knockback
+        if (rb != null)
+        {
+            rb.AddForce(hitForce * hitDirection, ForceMode2D.Force);
+        }
+    }
+
+    IEnumerator FlashRed(float duration)
+    {
+        float elapsed = 0;
+        Color startColor = new Color(1, 1, 1);
+        Color endColor = new Color(1, 0, 0);
+        float t = 0;
+
+        do
+        {
+            elapsed += Time.deltaTime;
+            t = elapsed / duration;
+
+            if (t < 0.5f)
+            {
+                Sprite.color = Color.Lerp(startColor, endColor, t * 2f);
+            }
+            else
+            {
+                Sprite.color = Color.Lerp(endColor, startColor, t * 2f);
+            }
+
+            yield return null;
+        }
+        while (t < 1f);
+
+        Sprite.color = startColor;
+    }    
+
+    void DoAttack(PlayerController playerToAttack)
+    {
+        playerToAttack.Hit(AttackDamage);
+    }
 
     public enum EnemyState
     {
         PatrolWait,
         PatrolMove,
         ChasingTarget,
-        Attacking
+        Attacking,
+        Stunned
     }
+
+
 }
