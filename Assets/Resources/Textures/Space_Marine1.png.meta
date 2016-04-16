@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: eb782118848692b45aa1c53d5a86a902
-timeCreated: 1460798571
+timeCreated: 1460848064
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -720,13 +720,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 1, y: 6}
-        - {x: -14, y: -5}
-        - {x: -15, y: -10}
-        - {x: -15, y: -13}
-        - {x: -14, y: -15}
-        - {x: -9, y: -16}
-        - {x: 16, y: -16}
+      - - {x: 0, y: 6}
+        - {x: -13, y: -4}
+        - {x: -16, y: -8}
+        - {x: -16, y: -12}
+        - {x: -15, y: -14}
+        - {x: -3, y: -16}
+        - {x: 14, y: -16}
+        - {x: 16, y: -7}
         - {x: 16, y: 4}
         - {x: 12, y: 6}
     - name: Space_Marine1_35
@@ -740,12 +741,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 15, y: 5}
-        - {x: 4, y: 5}
-        - {x: -16, y: -5}
+      - - {x: -1, y: 6}
+        - {x: -16, y: -2}
         - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 1}
+        - {x: 14, y: -16}
+        - {x: 16, y: -13}
+        - {x: 16, y: 3}
+        - {x: 10, y: 6}
     outline: []
   spritePackingTag: 
   userData: 

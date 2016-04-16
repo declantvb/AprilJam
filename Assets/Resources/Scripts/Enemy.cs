@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float DamageStunTime = 0.5f;
     float stuntimeElapsed;
     [SerializeField] ParticleSystem BloodParticles;
+    [SerializeField] SpriteAnimation Anim_Death;
 
     int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
     Path currentPath;    
@@ -64,20 +65,31 @@ public class Enemy : MonoBehaviour
     {
         timeSinceRepath += Time.deltaTime;
 
-		if (health <= 0)
-		{
-			Destroy(gameObject);
-		}
+        //Check if dead
+        if (health <= 0 && lastState != EnemyState.Dead)
+        {
+            State = EnemyState.Dead;
 
-        //Find target  
-        UpdateState();
+            //Remove components
+            DestroyImmediate(GetComponent<WalkAnimator>());
+            Destroy(seeker);
+            Destroy(rb);
+            Destroy(GetComponent<CircleCollider2D>());
 
-        //Move along path towards target
-        UpdateMovement();
+            Anim_Death.PlayOneShot();
+        }
+        else
+        {
+            //Find target  
+            UpdateState();
+
+            //Move along path towards target
+            UpdateMovement();
+        }
 
         lastState = State;
     }
-       
+           
     void UpdateState()
     {      
         //Move enemy unless it is stunned
@@ -229,7 +241,7 @@ public class Enemy : MonoBehaviour
         }
 
         //Move enemy unless it is stunned
-        if (State != EnemyState.Stunned)
+        if (State == EnemyState.PatrolMove || State == EnemyState.ChasingTarget) 
         {
             Vector3 Vf = moveDir * moveSpeed;
             Vector3 Vi = rb.velocity;
@@ -275,7 +287,7 @@ public class Enemy : MonoBehaviour
 
         //Play blood particles
         BloodParticles.transform.forward = hitDirection;
-        BloodParticles.Play();
+        BloodParticles.Play();      
     }
 
     IEnumerator FlashRed(float duration)
@@ -317,7 +329,8 @@ public class Enemy : MonoBehaviour
         PatrolMove,
         ChasingTarget,
         Attacking,
-        Stunned
+        Stunned,
+        Dead
     }
 
 
