@@ -13,6 +13,12 @@ public class CameraController : MonoBehaviour
 		PlayerAvatar = Player.GetComponentInChildren<PlayerController>().transform;
 	}
 
+	public void updateCameraViewport(Rect ViewportRect)
+	{
+		var camera = GetComponent<Camera>();
+		camera.rect = ViewportRect;
+	}
+
 	// Update is called once per frame
 	void Update()
 	{

@@ -7,7 +7,7 @@ public class InputController : MonoBehaviour
 {
 	private int nextPlayer = 0;
 	public GameObject ControllerPrefab;
-	public Transform[] players;
+	public GameObject PlayerPrefab;
 	public Controller[] controllers;
 
 	public string L_XAxis = "L_XAxis_";
@@ -24,7 +24,6 @@ public class InputController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		players = FindObjectsOfType<PlayerController>().Select(p=>p.transform.parent).OrderBy(x=>x.name).ToArray();
 		controllers = new Controller[4];
 		for (int i = 0; i < 4; i++)
 		{
@@ -38,6 +37,7 @@ public class InputController : MonoBehaviour
 			controller.VerticalAimAxis = R_YAxis + inputIndex;
 			controller.FireAxis = RBButton + inputIndex;
 			controller.WeaponSwitchAxis = AButton + inputIndex;
+			controller.ViewportRect = new Rect(0.5f * (i / 2), 0.5f * (i % 2), 0.5f, 0.5f);
 		}
 	}
 
@@ -49,6 +49,6 @@ public class InputController : MonoBehaviour
 
 	internal Transform NextAvailablePlayer()
 	{
-		return players[nextPlayer++];
+		return ((GameObject)Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity)).transform;
 	}
 }

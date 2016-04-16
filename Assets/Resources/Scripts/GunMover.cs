@@ -10,20 +10,20 @@ public class GunMover : MonoBehaviour
 	[SerializeField] Vector2 offsetForGunForRightSprite;
 
 	[Header("Sprites")]
-	[SerializeField] Sprite upGun;
-	[SerializeField] Sprite rightGun;
-	[SerializeField] Sprite downGun;
-	[SerializeField] Sprite leftGun;
+	public Sprite UpGun;
+	public Sprite RightGun;
+	public Sprite DownGun;
+	public Sprite LeftGun;
 
 	[SerializeField] Transform gunTransform;
 	[SerializeField] SpriteRenderer gunSpriterenderer;
 
-	Sprite currentGunSprite;
+	public Sprite CurrentGunSprite;
 	Vector2 mousePosition;
 
 	void Start()
 	{
-		currentGunSprite = rightGun;
+		CurrentGunSprite = RightGun;
 	}
 
 	void Update()
@@ -44,7 +44,6 @@ public class GunMover : MonoBehaviour
 
 	void UpdateSprite(Vector2 direction)
 	{
-
 		if (direction == Vector2.zero)
 		{
 			//Special case
@@ -55,26 +54,26 @@ public class GunMover : MonoBehaviour
 			{
 				if (direction.y >= 0)//We are moving up
 				{
-					currentGunSprite = upGun;
+					CurrentGunSprite = UpGun;
 				}
 				else//We are moving down
 				{
-					currentGunSprite = downGun;
+					CurrentGunSprite = DownGun;
 				}
 			}
 			else //We are moving left or right
 			{
 				if (direction.x >= 0)//We are moving to the right
 				{
-					currentGunSprite = rightGun;
+					CurrentGunSprite = RightGun;
 				}
 				else//We are moving to the left
 				{
-					currentGunSprite = leftGun;
+					CurrentGunSprite = LeftGun;
 				}
 			}
 
-			gunSpriterenderer.sprite = currentGunSprite;
+			gunSpriterenderer.sprite = CurrentGunSprite;
 		}
 	}
 }
