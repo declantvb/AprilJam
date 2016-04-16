@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 865014785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.142, y: 0, z: 0}
+  m_LocalPosition: {x: 0.071, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1871024105}
@@ -273,15 +273,17 @@ MonoBehaviour:
   SwitchingWeapon: 0
   joystickShooting: 0
   bulletSpeed: 5
+  PlayerSprite: {fileID: 0}
+  DamageRedFlashDuration: 0.2
   Weapons:
-  - BulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
+  - BulletPrefab: {fileID: 199206, guid: 9a3ca72efc27d4740b30ec48b18ecbcf, type: 2}
     Type: 0
     Damage: 15
     ShellCount: 1
     ShellSpeed: 5
     Cooldown: 0.1
     Accuracy: 0.6
-  - BulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
+  - BulletPrefab: {fileID: 199206, guid: 9a3ca72efc27d4740b30ec48b18ecbcf, type: 2}
     Type: 1
     Damage: 10
     ShellCount: 6
@@ -505,7 +507,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871024104}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: -0.003, y: -0.072, z: 0}
+  m_LocalPosition: {x: 0.076, y: -0.004, z: 0}
   m_LocalScale: {x: 1.7429202, y: 5.2631593, z: 1}
   m_Children: []
   m_Father: {fileID: 865014786}

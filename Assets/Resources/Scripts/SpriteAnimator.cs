@@ -27,11 +27,7 @@ public class SpriteAnimator : MonoBehaviour
 	Rigidbody2D rb2d;
 	int currentSpriteIndex;
 	float timeSinceLastSpriteChange;
-<<<<<<< HEAD:Assets/SpriteAnimator.cs
     Vector2 previousPositon;
-=======
-	Vector2 oldPosition;
->>>>>>> origin/master:Assets/Resources/Scripts/SpriteAnimator.cs
 
 	void Start()
 	{
@@ -46,25 +42,15 @@ public class SpriteAnimator : MonoBehaviour
 	{
 		UpdateSpriteIndex();
 		DetectWhichDirectionFacing();
-<<<<<<< HEAD:Assets/SpriteAnimator.cs
         //testMovement();
 
         previousPositon = transform.position;
-=======
-
-		oldPosition = transform.position;
->>>>>>> origin/master:Assets/Resources/Scripts/SpriteAnimator.cs
 	}
 
 	void DetectWhichDirectionFacing()
 	{
-<<<<<<< HEAD:Assets/SpriteAnimator.cs
         Vector2 direction = (Vector2)transform.position - previousPositon;
         
-=======
-		Vector2 direction = (Vector2)transform.position - oldPosition;
-
->>>>>>> origin/master:Assets/Resources/Scripts/SpriteAnimator.cs
 		if (direction == Vector2.zero)
 		{
 			currentAnimationSpeed = 0f;
@@ -117,6 +103,14 @@ public class SpriteAnimator : MonoBehaviour
 			spriteRenderer.sprite = currentSpriteDirection[currentSpriteIndex];
 			//Debug.Log(currentSpriteIndex);
 		}
+	}
+
+	void testMovement()
+	{
+		Vector2 direction = FindObjectOfType<PlayerController>().transform.position - transform.position;
+		direction = direction.normalized;
+
+		rb2d.velocity = direction * speed;
 	}
 
 }
