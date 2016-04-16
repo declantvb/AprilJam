@@ -23,7 +23,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Floor
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Particles
+    uniqueID: 3846084583
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

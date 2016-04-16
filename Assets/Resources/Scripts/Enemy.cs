@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float DamageRedFlashDuration = 0.2f;
     [SerializeField] float DamageStunTime = 0.5f;
     float stuntimeElapsed;
+    [SerializeField] ParticleSystem BloodParticles;
 
     int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
     Path currentPath;    
@@ -271,6 +272,10 @@ public class Enemy : MonoBehaviour
         {
             rb.AddForce(hitForce * hitDirection, ForceMode2D.Force);
         }
+
+        //Play blood particles
+        BloodParticles.transform.forward = hitDirection;
+        BloodParticles.Play();
     }
 
     IEnumerator FlashRed(float duration)
@@ -303,7 +308,7 @@ public class Enemy : MonoBehaviour
 
     void DoAttack(PlayerController playerToAttack)
     {
-        playerToAttack.Hit(AttackDamage);
+        playerToAttack.Hit(AttackDamage, (playerToAttack.transform.position - transform.position).normalized, 0f);
     }
 
     public enum EnemyState

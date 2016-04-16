@@ -6,26 +6,26 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Combat")]
     public float health = 100f;
-
-	public string horizontalAxis = "Horizontal";
-	public string verticalAxis = "Vertical";
-	public float speed = 1.0f;
-
+	
 	public GameObject bulletStart;
-	public string horizontal2Axis = "Horizontal2";
-	public string vertical2Axis = "Vertical2";
-	private const string shootAxis = "Fire1";
-	private const string WeaponSwitchAxis = "WeaponSwitch";
 	public bool SwitchingWeapon;
-	public bool joystickShooting = true;
 	private float shootCooldown = 0f;
 
+	[Header("Axes")]
+	public string horizontalAxis = "";
+	public string verticalAxis = "";
+	public string horizontal2Axis = "";
+	public string vertical2Axis = "";
+	public string shootAxis = "";
+	public string WeaponSwitchAxis = "";
+	
+	public float speed = 1.0f;
 	private Rigidbody2D rigidbodys;
-	public float bulletSpeed;
 
     [Header("Graphics")]
     [SerializeField] SpriteRenderer PlayerSprite;
     [SerializeField] float DamageRedFlashDuration = 0.2f;
+    [SerializeField] ParticleSystem BloodParticles;
 
 	public WeaponDescription[] Weapons = new WeaponDescription[0];
 	public int currentWeaponIndex = 0;
@@ -49,14 +49,17 @@ public class PlayerController : MonoBehaviour
 			Destroy(gameObject);
 		}
 
-		HandleMovement();
+		if (horizontalAxis != "")
+		{
+			HandleMovement();
 
-		HandleShooting();
+			HandleShooting(); 
+		}
 	}
 
 	private void HandleMovement()
 	{
-		var targetVelocity = (Vector2.right * Input.GetAxis(horizontalAxis) + Vector2.up * Input.GetAxis(verticalAxis)).normalized * speed;
+		var targetVelocity = (Vector2.right * Input.GetAxis(horizontalAxis) + Vector2.up * -Input.GetAxis(verticalAxis)).normalized * speed;
 		var delta = targetVelocity - rigidbodys.velocity;
 		rigidbodys.MovePosition(rigidbodys.position + delta * Time.deltaTime);
 	}
@@ -76,18 +79,7 @@ public class PlayerController : MonoBehaviour
 			SwitchingWeapon = false;
 		}
 
-		Vector2 shootDirection = Vector2.right * Input.GetAxis(horizontal2Axis) + Vector2.up * Input.GetAxis(vertical2Axis);
-
-		if (shootDirection.sqrMagnitude == 0.0f)
-		{
-			joystickShooting = false;
-			var mousePos = Input.mousePosition;
-			shootDirection = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		}
-		else
-		{
-			joystickShooting = true;
-		}
+		Vector2 shootDirection = Vector2.right * -Input.GetAxis(horizontal2Axis) + Vector2.up * Input.GetAxis(vertical2Axis);
 
 		if (shootDirection.sqrMagnitude > 0.0f)
 		{
@@ -96,7 +88,7 @@ public class PlayerController : MonoBehaviour
 			rotation.y = 0;
 			//transform.rotation = rot;
 
-			if (shootCooldown < 0f && (joystickShooting || Input.GetAxis(shootAxis) > 0))
+			if (shootCooldown < 0f)
 			{
 				FireWeapon();
 			}
@@ -138,11 +130,15 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	internal void Hit(float damage)
-	{
-		health -= damage;
+    internal void Hit(float damage, Vector3 hitDirection, float hitForce)
+    {
+        health -= damage;
         StartCoroutine(FlashRed(DamageRedFlashDuration));
-	}
+
+        //Play blood particles
+        BloodParticles.transform.forward = hitDirection;
+        BloodParticles.Play();
+    }
 
     IEnumerator FlashRed(float duration)
     {
