@@ -243,7 +243,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.3}
+  m_Size: {x: 0.1, y: 0.1}
 --- !u!81 &8189726
 AudioListener:
   m_ObjectHideFlags: 1
@@ -281,6 +281,7 @@ MonoBehaviour:
   speed: 5
   PlayerSprite: {fileID: 21245454}
   DamageRedFlashDuration: 0.2
+  BloodParticles: {fileID: 0}
   Weapons:
   - BulletPrefab: {fileID: 199206, guid: 9a3ca72efc27d4740b30ec48b18ecbcf, type: 2}
     Type: 0
@@ -297,6 +298,7 @@ MonoBehaviour:
     Cooldown: 1
     Accuracy: 0.05
   currentWeaponIndex: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11420002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,12 +314,13 @@ MonoBehaviour:
   offsetForGunForUpSprite: {x: 0, y: 0}
   offsetForGunForLeftSprite: {x: 0, y: 0}
   offsetForGunForRightSprite: {x: 0, y: 0}
-  upGun: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  rightGun: {fileID: 21300048, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  downGun: {fileID: 21300016, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  leftGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  UpGun: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  RightGun: {fileID: 21300048, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  DownGun: {fileID: 21300016, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  LeftGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
   gunTransform: {fileID: 451682}
   gunSpriterenderer: {fileID: 21204756}
+  CurrentGunSprite: {fileID: 0}
 --- !u!114 &11440256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,12 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1abe3ea16e37744a630bee6c3b7be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewportRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
 --- !u!114 &11470602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -388,6 +385,7 @@ MonoBehaviour:
   - {fileID: 21300038, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   timePerFrame: 0.2
   animationPlayingForward: 1
+  isPlayer: 0
   speed: 1.5
 --- !u!124 &12402530
 Behaviour:
@@ -423,7 +421,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  m_Color: {r: 0.43382353, g: 0.43382353, b: 0.43382353, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &21245454

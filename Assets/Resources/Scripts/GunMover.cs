@@ -20,17 +20,17 @@ public class GunMover : MonoBehaviour
 
 	public Sprite CurrentGunSprite;
 	Vector2 mousePosition;
+	private PlayerController Player;
 
 	void Start()
 	{
 		CurrentGunSprite = RightGun;
+		Player = GetComponentInParent<PlayerController>();
 	}
 
 	void Update()
 	{
-		mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector2 direction = mousePosition - (Vector2)transform.position;
-		direction = direction.normalized;
+		var direction = Player.rotation * Vector2.up;
 
 		UpdateGunRotation(direction);
 		UpdateSprite(direction);
