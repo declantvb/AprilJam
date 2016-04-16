@@ -26,6 +26,8 @@ public class BulletController : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
+		print("hit");
+
 		var player = other.GetComponent<PlayerController>();
 		if (player != null)
 		{
