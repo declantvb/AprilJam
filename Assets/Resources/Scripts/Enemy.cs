@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
             Target = closestPlayer.transform;
 
             //Begin pathfinding to new target
-            seeker.StartPath(transform.position, Target.transform.position);
+            seeker.StartPath(transform.position, Target.transform.position, OnPathComplete);
         }
 
         //Move along path towards target
@@ -59,8 +59,19 @@ public class Enemy : MonoBehaviour
             //Vector3 targetDir = (Target.position - transform.position).normalized;
             // rb.MovePosition(transform.position + targetDir * MaxSpeed * Time.deltaTime);
         }
+    }
 
-
-
+    //This sets the path of the Seeker object when seeker.StartPath is called       (assuming a path is possible between target and seeker)
+    void OnPathComplete(Path p)
+    {        
+        if (!p.error)
+        {
+            currentPath = p;           
+            currentWaypoint = 0;        //Reset the waypoint counter
+        }
+        else
+        {
+            Debug.Log("Enemy had path error: " + p.error);
+        }
     }
 }
