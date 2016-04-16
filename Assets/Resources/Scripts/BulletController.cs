@@ -7,6 +7,7 @@ public class BulletController : MonoBehaviour
 	private float ttl;
 	public float damage;
     public float knockbackForce = 20f;
+	public GameObject Owner;
 
     // Use this for initialization
     void Start()
@@ -28,10 +29,13 @@ public class BulletController : MonoBehaviour
 	{
 		print("hit");
 
-		var player = other.GetComponent<PlayerController>();
-		if (player != null)
+		if (Owner.GetComponent<PlayerController>() == null)
 		{
-			player.Hit(damage, transform.up, knockbackForce);
+			var player = other.GetComponent<PlayerController>();
+			if (player != null)
+			{
+				player.Hit(damage, transform.up, knockbackForce);
+			} 
 		}
 		
 		var enemy = other.GetComponent<Enemy>();

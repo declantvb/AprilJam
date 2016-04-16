@@ -4,9 +4,9 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Combat")]
-    public float health = 100f;
-	
+	[Header("Combat")]
+	public float health = 100f;
+
 	public GameObject bulletStart;
 	public bool SwitchingWeapon;
 	private float shootCooldown = 0f;
@@ -18,14 +18,17 @@ public class PlayerController : MonoBehaviour
 	public string vertical2Axis = "";
 	public string shootAxis = "";
 	public string WeaponSwitchAxis = "";
-	
-	public float speed = 1.0f;
-	private Rigidbody2D rigidbodys;
 
-    [Header("Graphics")]
-    [SerializeField] SpriteRenderer PlayerSprite;
-    [SerializeField] float DamageRedFlashDuration = 0.2f;
-    [SerializeField] ParticleSystem BloodParticles;
+	public float speed = 1.0f;
+	private Rigidbody2D rb2d;
+
+	[Header("Graphics")]
+	[SerializeField]
+	SpriteRenderer PlayerSprite;
+	[SerializeField]
+	float DamageRedFlashDuration = 0.2f;
+	[SerializeField]
+	ParticleSystem BloodParticles;
 
 	public WeaponDescription[] Weapons = new WeaponDescription[0];
 	public int currentWeaponIndex = 0;
@@ -38,30 +41,30 @@ public class PlayerController : MonoBehaviour
 	void Start()
 	{
 		shootCooldown = 0f;
-		rigidbodys = GetComponent<Rigidbody2D>();
-    }
+		rb2d = GetComponent<Rigidbody2D>();
+	}
 
 	// Update is called once per frame
 	void Update()
 	{
 		if (health <= 0)
 		{
-			Destroy(gameObject);
+			//TODO joe
 		}
 
 		if (horizontalAxis != "")
 		{
 			HandleMovement();
 
-			HandleShooting(); 
+			HandleShooting();
 		}
 	}
 
 	private void HandleMovement()
 	{
 		var targetVelocity = (Vector2.right * Input.GetAxis(horizontalAxis) + Vector2.up * -Input.GetAxis(verticalAxis)).normalized * speed;
-		var delta = targetVelocity - rigidbodys.velocity;
-		rigidbodys.MovePosition(rigidbodys.position + delta * Time.deltaTime);
+		var delta = targetVelocity - rb2d.velocity;
+		rb2d.MovePosition(rb2d.position + delta * Time.deltaTime);
 	}
 
 	private void HandleShooting()
@@ -128,46 +131,51 @@ public class PlayerController : MonoBehaviour
 		{
 			var randAngle = Quaternion.AngleAxis((UnityEngine.Random.value - 0.5f) / weapon.Accuracy, Vector3.forward);
 			var newBullet = (GameObject)Instantiate(weapon.BulletPrefab, position, rotation * randAngle);
+			newBullet.GetComponent<BulletController>().Owner = gameObject;
+			foreach (var col in gameObject.GetComponentsInChildren<Collider2D>())
+			{
+				Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), col);
+			}
 			var randomSpeedFactor = 1;// + (UnityEngine.Random.value - 0.5f) / 10;
 			newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.up * weapon.ShellSpeed * randomSpeedFactor, ForceMode2D.Impulse);
 		}
 	}
 
-    internal void Hit(float damage, Vector3 hitDirection, float hitForce)
-    {
-        health -= damage;
-        StartCoroutine(FlashRed(DamageRedFlashDuration));
+	internal void Hit(float damage, Vector3 hitDirection, float hitForce)
+	{
+		health -= damage;
+		StartCoroutine(FlashRed(DamageRedFlashDuration));
 
-        //Play blood particles
-        BloodParticles.transform.forward = hitDirection;
-        BloodParticles.Play();
-    }
+		//Play blood particles
+		BloodParticles.transform.forward = hitDirection;
+		BloodParticles.Play();
+	}
 
-    IEnumerator FlashRed(float duration)
-    {
-        float elapsed = 0;
-        Color startColor = new Color(1, 1, 1);
-        Color endColor = new Color(1, 0, 0);
-        float t = 0;
+	IEnumerator FlashRed(float duration)
+	{
+		float elapsed = 0;
+		Color startColor = new Color(1, 1, 1);
+		Color endColor = new Color(1, 0, 0);
+		float t = 0;
 
-        do
-        {
-            elapsed += Time.deltaTime;           
-            t = elapsed / duration;
+		do
+		{
+			elapsed += Time.deltaTime;
+			t = elapsed / duration;
 
-            if (t < 0.5f)
-            {
-                PlayerSprite.color = Color.Lerp(startColor, endColor, t * 2f);
-            }
-            else
-            {
-                PlayerSprite.color = Color.Lerp(endColor, startColor, t * 2f);
-            }
+			if (t < 0.5f)
+			{
+				PlayerSprite.color = Color.Lerp(startColor, endColor, t * 2f);
+			}
+			else
+			{
+				PlayerSprite.color = Color.Lerp(endColor, startColor, t * 2f);
+			}
 
-            yield return null;
-        }
-        while (t < 1f);
+			yield return null;
+		}
+		while (t < 1f);
 
-        PlayerSprite.color = startColor;
-    }
+		PlayerSprite.color = startColor;
+	}
 }

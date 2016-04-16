@@ -13,11 +13,13 @@ public class Controller : MonoBehaviour
 
 	public bool bound = false;
 	public InputController inputMaster;
+	public GameController gameMaster;
 
 	// Use this for initialization
 	void Start()
 	{
 		inputMaster = GetComponentInParent<InputController>();
+		gameMaster = FindObjectOfType<GameController>();
 	}
 
 	// Update is called once per frame
@@ -36,6 +38,7 @@ public class Controller : MonoBehaviour
 			var camera = player.GetComponentInChildren<CameraController>();
 			camera.updateCameraViewport(ViewportRect);
 
+			gameMaster.Lives--;
 			bound = true;
 		}
 	}
