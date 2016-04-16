@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &118234
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 442968}
-  m_Layer: 0
-  m_Name: Gun holder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &127930
 GameObject:
   m_ObjectHideFlags: 1
@@ -46,6 +31,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &189616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 488740}
+  m_Layer: 0
+  m_Name: Gun holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &197622
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,9 +57,9 @@ GameObject:
   - 58: {fileID: 5846338}
   - 114: {fileID: 11477048}
   - 50: {fileID: 5017554}
-  - 114: {fileID: 11475426}
-  - 212: {fileID: 21297612}
-  - 114: {fileID: 11475434}
+  - 114: {fileID: 11451384}
+  - 212: {fileID: 21272998}
+  - 114: {fileID: 11425548}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -77,21 +77,8 @@ Transform:
   m_LocalPosition: {x: -1.46, y: 1.7, z: -1.5452027}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
-  - {fileID: 442968}
+  - {fileID: 488740}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &442968
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118234}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 487146}
-  m_Father: {fileID: 442174}
   m_RootOrder: 0
 --- !u!4 &466244
 Transform:
@@ -116,7 +103,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466244}
-  m_Father: {fileID: 442968}
+  m_Father: {fileID: 488740}
+  m_RootOrder: 0
+--- !u!4 &488740
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0339, y: 0.0281, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 487146}
+  m_Father: {fileID: 442174}
   m_RootOrder: 0
 --- !u!50 &5017554
 Rigidbody2D:
@@ -149,28 +149,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &11475426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c454789206a504eabfb84e6e15f767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetForGunForDownSprite: {x: 0, y: 0}
-  offsetForGunForUpSprite: {x: 0, y: 0}
-  offsetForGunForLeftSprite: {x: 0, y: 0}
-  offsetForGunForRightSprite: {x: 0, y: 0}
-  upGun: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  rightGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  downGun: {fileID: 21300016, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  leftGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  gunTransform: {fileID: 442968}
-  gunSpriterenderer: {fileID: 21241966}
---- !u!114 &11475434
+--- !u!114 &11425548
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -222,7 +201,29 @@ MonoBehaviour:
   - {fileID: 21300036, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   - {fileID: 21300038, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   timePerFrame: 0.2
+  animationPlayingForward: 1
   speed: 1.5
+--- !u!114 &11451384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c454789206a504eabfb84e6e15f767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetForGunForDownSprite: {x: 0, y: 0}
+  offsetForGunForUpSprite: {x: 0, y: 0}
+  offsetForGunForLeftSprite: {x: 0, y: 0}
+  offsetForGunForRightSprite: {x: 0, y: 0}
+  upGun: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  rightGun: {fileID: 21300048, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  downGun: {fileID: 21300016, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  leftGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  gunTransform: {fileID: 488740}
+  gunSpriterenderer: {fileID: 21241966}
 --- !u!114 &11477048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,7 +293,7 @@ SpriteRenderer:
   m_Color: {r: 0.43382353, g: 0.43382353, b: 0.43382353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!212 &21297612
+--- !u!212 &21272998
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

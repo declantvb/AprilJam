@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
-public class SpriteAnimator : MonoBehaviour 
+public class WalkAnimator : MonoBehaviour 
 {
 	[Header("Sprites")]
 	[SerializeField] Sprite[] walkingUpSprites;
@@ -17,9 +17,11 @@ public class SpriteAnimator : MonoBehaviour
 
 	[Header("Animation Settings")]
 	[Range(0.001f, 1f)] [SerializeField] float timePerFrame;
+	[SerializeField] bool animationPlayingForward;
 
 	[Header("Testing variables")]
 	[Range(0f, 4f)] [SerializeField] float speed = 1.5f;
+
 
 	float currentAnimationSpeed;
 	Sprite[] currentSpriteDirection;
@@ -98,10 +100,21 @@ public class SpriteAnimator : MonoBehaviour
 		if (Time.time >= timeSinceLastSpriteChange + timePerFrame)
 		{
 			timeSinceLastSpriteChange = Time.time;
-			currentSpriteIndex++;
-			currentSpriteIndex %= currentSpriteDirection.Length;//Wrap around the animation
-			spriteRenderer.sprite = currentSpriteDirection[currentSpriteIndex];
-			//Debug.Log(currentSpriteIndex);
+
+			if (animationPlayingForward)
+			{
+				currentSpriteIndex++;
+				currentSpriteIndex %= currentSpriteDirection.Length;//Wrap around the animation
+				spriteRenderer.sprite = currentSpriteDirection[currentSpriteIndex];
+			}
+			else
+			{
+				currentSpriteIndex--;
+				if (currentSpriteIndex < 0)
+					currentSpriteIndex = currentSpriteDirection.Length - 1;//Wrap it around
+				spriteRenderer.sprite = currentSpriteDirection[currentSpriteIndex];
+			}
+
 		}
 	}
 

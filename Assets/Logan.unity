@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2085964, guid: 1ab79f6a50a544b45adad8e310788e33, type: 2}
       propertyPath: orthographic size
-      value: 1.65
+      value: 4.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ab79f6a50a544b45adad8e310788e33, type: 2}
@@ -228,7 +228,7 @@ MonoBehaviour:
   offsetForGunForLeftSprite: {x: 0, y: 0}
   offsetForGunForRightSprite: {x: 0, y: 0}
   upGun: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
-  rightGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
+  rightGun: {fileID: 21300048, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
   downGun: {fileID: 21300016, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
   leftGun: {fileID: 21300032, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
   gunTransform: {fileID: 1495964460}
@@ -371,6 +371,7 @@ MonoBehaviour:
   - {fileID: 21300036, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   - {fileID: 21300038, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   timePerFrame: 0.2
+  animationPlayingForward: 1
   speed: 1.5
 --- !u!212 &1435433164
 SpriteRenderer:
@@ -424,7 +425,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1495964459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0339, y: 0.0281, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 865014786}
