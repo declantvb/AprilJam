@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 	public int currentWeaponIndex = 0;
 	[SerializeField]
 	public WeaponDescription currentWeapon { get { return currentWeaponIndex < Weapons.Length ? Weapons[currentWeaponIndex] : null; } }
+	Quaternion rotation;
 
 
 	// Use this for initialization
@@ -90,10 +91,10 @@ public class PlayerController : MonoBehaviour
 
 		if (shootDirection.sqrMagnitude > 0.0f)
 		{
-			var rot = Quaternion.LookRotation(shootDirection, Vector3.forward);
-			rot.x = 0;
-			rot.y = 0;
-			transform.rotation = rot;
+			rotation = Quaternion.LookRotation(shootDirection, Vector3.forward);
+			rotation.x = 0;
+			rotation.y = 0;
+			//transform.rotation = rot;
 
 			if (shootCooldown < 0f && (joystickShooting || Input.GetAxis(shootAxis) > 0))
 			{
@@ -113,10 +114,10 @@ public class PlayerController : MonoBehaviour
 		switch (currentWeapon.Type)
 		{
 			case WeaponType.Auto:
-				MakeBullets(currentWeapon, bulletStart.transform.position, transform.rotation);
+				MakeBullets(currentWeapon, bulletStart.transform.position, rotation);
 				break;
 			case WeaponType.Shotgun:
-				MakeBullets(currentWeapon, bulletStart.transform.position, transform.rotation);
+				MakeBullets(currentWeapon, bulletStart.transform.position, rotation);
 				break;
 			default:
 				Debug.LogError("bad weapon type");
