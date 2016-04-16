@@ -158,15 +158,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952cf525e5c190742862e2427d524a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   horizontalAxis: Horizontal
   verticalAxis: Vertical
   speed: 5
-  bulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
   bulletStart: {fileID: 127930}
   horizontal2Axis: Horizontal2
   vertical2Axis: Vertical2
+  SwitchingWeapon: 0
   joystickShooting: 0
-  shootDelay: 0.1
+  bulletSpeed: 5
+  Weapons:
+  - BulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
+    Type: 0
+    Damage: 15
+    ShellCount: 1
+    ShellSpeed: 5
+    Cooldown: 0.1
+    Accuracy: 0.6
+  - BulletPrefab: {fileID: 199206, guid: 29b235bb6e576ef47940bd95615292c8, type: 2}
+    Type: 1
+    Damage: 10
+    ShellCount: 6
+    ShellSpeed: 5
+    Cooldown: 1
+    Accuracy: 0.05
+  currentWeaponIndex: 0
 --- !u!212 &21241770
 SpriteRenderer:
   m_ObjectHideFlags: 1
