@@ -31,7 +31,7 @@ public class BulletController : MonoBehaviour
 		var player = other.GetComponent<PlayerController>();
 		if (player != null)
 		{
-			player.Hit(damage);
+			player.Hit(damage, transform.up, knockbackForce);
 		}
 		
 		var enemy = other.GetComponent<Enemy>();

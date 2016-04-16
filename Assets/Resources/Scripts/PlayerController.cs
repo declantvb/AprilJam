@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Graphics")]
     [SerializeField] SpriteRenderer PlayerSprite;
     [SerializeField] float DamageRedFlashDuration = 0.2f;
+    [SerializeField] ParticleSystem BloodParticles;
 
 	public WeaponDescription[] Weapons = new WeaponDescription[0];
 	public int currentWeaponIndex = 0;
@@ -129,11 +130,15 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	internal void Hit(float damage)
-	{
-		health -= damage;
+    internal void Hit(float damage, Vector3 hitDirection, float hitForce)
+    {
+        health -= damage;
         StartCoroutine(FlashRed(DamageRedFlashDuration));
-	}
+
+        //Play blood particles
+        BloodParticles.transform.forward = hitDirection;
+        BloodParticles.Play();
+    }
 
     IEnumerator FlashRed(float duration)
     {
