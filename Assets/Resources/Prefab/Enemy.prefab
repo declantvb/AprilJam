@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 458370}
   - 212: {fileID: 21269276}
+  - 114: {fileID: 11464882}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -93,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 3.5, z: 0}
+  m_LocalPosition: {x: -2.72, y: 1.077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458370}
@@ -120,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.003, y: -0.031, z: 0}
+  m_LocalPosition: {x: 0.003, y: -0.098, z: 0}
   m_LocalScale: {x: 0.6371817, y: 0.4066309, z: 0.66886634}
   m_Children: []
   m_Father: {fileID: 419544}
@@ -288,6 +289,19 @@ MonoBehaviour:
   currentFrame: 0
   Playing: 0
   OneShotting: 0
+--- !u!114 &11464882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0949366396f87624e8195956257857f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: -31
+  CurrentSortOrder: -97
 --- !u!114 &11474574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0949366396f87624e8195956257857f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentSortOrder: 0
+  Offset: 0
+  CurrentSortOrder: -107
 --- !u!198 &19810198
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1877,7 +1892,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -128
   m_Sprite: {fileID: 21300000, guid: a03f31a3eea4d33439e47334ddbb7e3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.384}
   m_FlipX: 0
@@ -1907,7 +1922,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -107
   m_Sprite: {fileID: 21300000, guid: e654036c5f206064199f32952c83629e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

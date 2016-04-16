@@ -136,11 +136,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 419544, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -2.72
       objectReference: {fileID: 0}
     - target: {fileID: 419544, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 1.077
       objectReference: {fileID: 0}
     - target: {fileID: 419544, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
       propertyPath: m_LocalPosition.z
@@ -165,6 +165,18 @@ Prefab:
     - target: {fileID: 419544, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464882, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
+      propertyPath: Offset
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464882, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
+      propertyPath: CurrentSortOrder
+      value: -97
+      objectReference: {fileID: 0}
+    - target: {fileID: 458370, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.098
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
@@ -226,7 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0949366396f87624e8195956257857f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentSortOrder: 0
+  Offset: 0
+  CurrentSortOrder: -120
 --- !u!1001 &1932773636
 Prefab:
   m_ObjectHideFlags: 0
