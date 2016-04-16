@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using System.IO;
 using System;
 using System.Linq;
 using System.Xml;
 using System.Collections.Generic;
+
+using UnityEditor;
 
 [CustomEditor(typeof(TiledLevelImporter))]
 public class TiledLevelImporterEditor : Editor
@@ -171,3 +174,6 @@ public class TiledLevelImporterEditor : Editor
         return tileset;
     }
 }
+
+
+#endif
