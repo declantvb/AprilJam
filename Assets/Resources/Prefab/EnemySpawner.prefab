@@ -42,7 +42,7 @@ GameObject:
   - 4: {fileID: 462966}
   - 212: {fileID: 21225884}
   - 114: {fileID: 11466202}
-  - 65: {fileID: 6521402}
+  - 58: {fileID: 5880368}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.761, y: 3.683, z: 0}
+  m_LocalPosition: {x: -2.0021813, y: 4.0289974, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 483884}
@@ -176,18 +176,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 462966}
   m_RootOrder: 4
---- !u!65 &6521402
-BoxCollider:
+--- !u!58 &5880368
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122600}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.4
 --- !u!114 &11401492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,6 +272,8 @@ MonoBehaviour:
   DamageRedFlashDuration: 0.2
   Sprite: {fileID: 0}
   BloodParticles: {fileID: 19866456}
+  dead: 0
+  DeadPrefab: {fileID: 122392, guid: fd0f6b81990bdab4084f46834b20c817, type: 2}
   EnemyPrefab: {fileID: 192802, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
   MinSpawnDelay: 3
   MaxSpawnDelay: 10
@@ -277,6 +281,7 @@ MonoBehaviour:
   Anim_Puru: {fileID: 11480430}
   Anim_CrackPuru: {fileID: 11401492}
   Anim_Uncrack: {fileID: 11452436}
+  Anim_Die: {fileID: 0}
   state: 0
 --- !u!114 &11480430
 MonoBehaviour:

@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
 	[SerializeField] float DamageRedFlashDuration = 0.2f;
     [SerializeField] SpriteRenderer Sprite;
 	[SerializeField] ParticleSystem BloodParticles;
+	[SerializeField] bool dead;
+	[SerializeField] GameObject DeadPrefab;
 
 	[SerializeField] GameObject EnemyPrefab;
     [SerializeField] float MinSpawnDelay = 3f;
@@ -25,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
 	[SerializeField] SpriteAnimation Anim_Uncrack;
 	[SerializeField] SpriteAnimation Anim_Die;
     [SerializeField] int state;
-	private bool dying;
 
 	void Start()
     {
@@ -35,23 +36,28 @@ public class EnemySpawner : MonoBehaviour
     
     void Update()
     {
-		if (health <= 0)
+		if (!dead)
 		{
-			if (!dying)
+			if (health <= 0)
 			{
 				Anim_Die.PlayOneShot(); 
+				dead = true;
 			}
-			dying = true;
-		}
-		else
-		{
-			spawnElapsed += Time.deltaTime;
-			if (spawnElapsed >= nextSpawnDelay)
+			else
 			{
-				spawnElapsed = 0;
-				nextSpawnDelay = Random.Range(MinSpawnDelay, MaxSpawnDelay);
-				StartCoroutine(HatchNewEnemy());
+				spawnElapsed += Time.deltaTime;
+				if (spawnElapsed >= nextSpawnDelay)
+				{
+					spawnElapsed = 0;
+					nextSpawnDelay = Random.Range(MinSpawnDelay, MaxSpawnDelay);
+					StartCoroutine(HatchNewEnemy());
+				}
 			}
+		}
+		else if (!Anim_Die.IsPlaying)
+		{
+			Instantiate(DeadPrefab, transform.position, transform.rotation);
+			Destroy(gameObject);
 		}
     }
 	

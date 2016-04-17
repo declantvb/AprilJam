@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float AttackCooldown = 1f;
     [SerializeField] float AttackDamage = 10f;
     float attackCooldownElapsed;
+	[SerializeField] GameObject DeadPrefab;
 	
     [Header("Pathfinding")]
     [SerializeField] float nextWaypointDistance = 1;                //The max distance from the AI to a waypoint for it to continue to the next waypoint
@@ -79,8 +80,8 @@ public class Enemy : MonoBehaviour
             {
                 State = EnemyState.Dead;
 
-                //Remove components
-                DestroyImmediate(GetComponent<WalkAnimator>());
+				//Remove components
+				DestroyImmediate(GetComponent<WalkAnimator>());
                 Destroy(seeker);
                 Destroy(rb);
                 Destroy(GetComponent<CircleCollider2D>());
@@ -96,6 +97,11 @@ public class Enemy : MonoBehaviour
                 UpdateMovement();
             }
         }
+		else if (!Anim_Death.IsPlaying)
+		{
+			Instantiate(DeadPrefab, transform.position, transform.rotation);
+			Destroy(gameObject);
+		}
 
         lastState = State;        
     }

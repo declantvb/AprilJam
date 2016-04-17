@@ -392,6 +392,7 @@ MonoBehaviour:
   AttackRange: 1.8
   AttackCooldown: 1
   AttackDamage: 100
+  DeadPrefab: {fileID: 179944, guid: 0f860aa4538e3da4d9dbde1a096359ca, type: 2}
   nextWaypointDistance: 0.3
   targetRepathDistanceTolerance: 1
   MinTimeBetweenRepath: 0.2
