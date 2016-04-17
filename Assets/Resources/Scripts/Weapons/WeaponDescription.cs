@@ -14,6 +14,7 @@ public class WeaponDescription
 	public float ShellSpeed;
 	public float Cooldown;
 	public float Accuracy;
+	public float SpeedJitterPercent;
 }
 
 public enum WeaponType

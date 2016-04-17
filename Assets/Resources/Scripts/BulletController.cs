@@ -16,7 +16,7 @@ public class BulletController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	public void Update()
 	{
 		ttl -= Time.deltaTime;
 		if (ttl < 0)
@@ -25,30 +25,33 @@ public class BulletController : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	public void OnTriggerEnter2D(Collider2D other)
 	{
-		print("hit");
+		DoDamageTo(other, damage, transform.up);
+		Destroy(gameObject);
+	}
 
+	public void DoDamageTo(Collider2D other, float damage, Vector3 direction)
+	{
 		if (Owner.GetComponent<PlayerController>() == null)
 		{
 			var player = other.GetComponent<PlayerController>();
 			if (player != null)
 			{
-				player.Hit(damage, transform.up, knockbackForce);
-			} 
+				player.Hit(damage, direction, knockbackForce);
+			}
 		}
-		
+
 		var enemy = other.GetComponent<Enemy>();
 		if (enemy != null)
 		{
-			enemy.Hit(damage, transform.up, knockbackForce);
+			enemy.Hit(damage, direction, knockbackForce);
 		}
 
 		var enemySpawner = other.GetComponent<EnemySpawner>();
 		if (enemySpawner != null)
 		{
-			enemySpawner.Hit(damage, transform.up, knockbackForce);
+			enemySpawner.Hit(damage, direction, knockbackForce);
 		}
-		Destroy(gameObject);
 	}
 }

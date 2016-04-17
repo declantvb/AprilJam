@@ -281,7 +281,7 @@ MonoBehaviour:
   Anim_Puru: {fileID: 11480430}
   Anim_CrackPuru: {fileID: 11401492}
   Anim_Uncrack: {fileID: 11452436}
-  Anim_Die: {fileID: 0}
+  Anim_Die: {fileID: 11401492}
   state: 0
 --- !u!114 &11480430
 MonoBehaviour:

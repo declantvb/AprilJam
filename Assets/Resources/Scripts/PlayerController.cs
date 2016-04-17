@@ -163,12 +163,23 @@ public class PlayerController : MonoBehaviour
 		{
 			var randAngle = Quaternion.AngleAxis((UnityEngine.Random.value - 0.5f) / weapon.Accuracy, Vector3.forward);
 			var newBullet = (GameObject)Instantiate(weapon.BulletPrefab, position, rotation * randAngle);
-			newBullet.GetComponent<BulletController>().Owner = gameObject;
+			var bullet = newBullet.GetComponent<BulletController>();
+			if (bullet != null)
+			{
+				bullet.Owner = gameObject;
+				bullet.damage = weapon.Damage;
+			}
+			var rocket = newBullet.GetComponent<RocketController>();
+			if (rocket != null)
+			{
+				rocket.Owner = gameObject;
+				rocket.damage = weapon.Damage;
+			}
 			foreach (var col in gameObject.GetComponentsInChildren<Collider2D>())
 			{
 				Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), col);
 			}
-			var randomSpeedFactor = 1;// + (UnityEngine.Random.value - 0.5f) / 10;
+			var randomSpeedFactor = 1 + ((UnityEngine.Random.value - 0.5f) / 0.5f) * weapon.SpeedJitterPercent;
 			newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.up * weapon.ShellSpeed * randomSpeedFactor, ForceMode2D.Impulse);
 		}
 	}

@@ -445,6 +445,7 @@ MonoBehaviour:
     ShellSpeed: 5
     Cooldown: 0.1
     Accuracy: 0.6
+    SpeedJitterPercent: 0
   - BulletPrefab: {fileID: 199206, guid: 9a3ca72efc27d4740b30ec48b18ecbcf, type: 2}
     Type: 1
     Damage: 10
@@ -452,6 +453,15 @@ MonoBehaviour:
     ShellSpeed: 5
     Cooldown: 1
     Accuracy: 0.05
+    SpeedJitterPercent: 0.05
+  - BulletPrefab: {fileID: 169062, guid: c54113ee3aefc8e4483118375a3c3ba9, type: 2}
+    Type: 0
+    Damage: 50
+    ShellCount: 1
+    ShellSpeed: 2
+    Cooldown: 2
+    Accuracy: 0.6
+    SpeedJitterPercent: 0
   currentWeaponIndex: 0
   rotation: {x: 0, y: 0, z: 0, w: 0}
   Controller: {fileID: 0}
