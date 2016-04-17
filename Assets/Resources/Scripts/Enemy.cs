@@ -46,6 +46,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] ParticleSystem BloodParticles;
     [SerializeField] SpriteAnimation Anim_Death;
 
+    [Header("Pounce Attack")]
+    [SerializeField] int animState = 0;
+    [SerializeField] SpriteAnimation Anim_Pounce_Up;
+    [SerializeField] SpriteAnimation Anim_Pounce_Down;
+    [SerializeField] SpriteAnimation Anim_Pounce_Left;
+    [SerializeField] SpriteAnimation Anim_Pounce_Right;
+
     int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
     Path currentPath;    
     bool calculatingPath;
@@ -53,7 +60,7 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Seeker seeker;
     Vector3 moveDir;
-
+    
 	void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -65,29 +72,32 @@ public class Enemy : MonoBehaviour
     {
         timeSinceRepath += Time.deltaTime;
 
-        //Check if dead
-        if (health <= 0 && lastState != EnemyState.Dead)
+        if (State != EnemyState.Dead)
         {
-            State = EnemyState.Dead;
+            //Check if dead
+            if (health <= 0)
+            {
+                State = EnemyState.Dead;
 
-            //Remove components
-            DestroyImmediate(GetComponent<WalkAnimator>());
-            Destroy(seeker);
-            Destroy(rb);
-            Destroy(GetComponent<CircleCollider2D>());
+                //Remove components
+                DestroyImmediate(GetComponent<WalkAnimator>());
+                Destroy(seeker);
+                Destroy(rb);
+                Destroy(GetComponent<CircleCollider2D>());
 
-            Anim_Death.PlayOneShot();
+                Anim_Death.PlayOneShot();
+            }
+            else
+            {
+                //Find target  
+                UpdateState();
+
+                //Move along path towards target
+                UpdateMovement();
+            }
         }
-        else
-        {
-            //Find target  
-            UpdateState();
 
-            //Move along path towards target
-            UpdateMovement();
-        }
-
-        lastState = State;
+        lastState = State;        
     }
            
     void UpdateState()
@@ -239,7 +249,7 @@ public class Enemy : MonoBehaviour
         {
             moveSpeed = MoveSpeed_Chasing;
         }
-
+                
         //Move enemy unless it is stunned
         Vector3 Vf = moveDir * moveSpeed;
         Vector3 Vi = rb.velocity;
@@ -247,7 +257,7 @@ public class Enemy : MonoBehaviour
         Vector3 F = (rb.mass * (Vf - Vi)) / 0.05f;               //EUREKA!!!
         rb.AddForce(F, ForceMode2D.Force);
 
-            //rb.MovePosition(transform.position + moveDir * moveSpeed * Time.deltaTime);
+        //rb.MovePosition(transform.position + moveDir * moveSpeed * Time.deltaTime);
     }
 
     void OnPathFound(Path p)
@@ -261,7 +271,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.Log("Enemy had path error: " + p.error);
+            //Debug.Log("Enemy had path error: " + p.error);
         }
 
         calculatingPath = false;
@@ -330,5 +340,75 @@ public class Enemy : MonoBehaviour
         Dead
     }
 
+    IEnumerator PounceAttack()
+    {
+        animState = 0;
 
+        //Halt walk animation
+        GetComponent<WalkAnimator>().enabled = false;
+        
+        SpriteAnimation currentPounceAnim;
+        if (Mathf.Abs(rb.velocity.y) >= Mathf.Abs(rb.velocity.x))//We are moving up or down
+        {
+            if (rb.velocity.y >= 0)//We are moving up
+            {
+                currentPounceAnim = Anim_Pounce_Up;                
+            }
+            else//We are moving down
+            {
+                currentPounceAnim = Anim_Pounce_Down;
+            }
+        }
+        else //We are moving left or right
+        {
+            if (rb.velocity.x >= 0)//We are moving to the right
+            {
+                currentPounceAnim = Anim_Pounce_Right;
+            }
+            else//We are moving to the left
+            {
+                currentPounceAnim = Anim_Pounce_Left;
+            }
+        }
+                
+        do
+        {/*
+            if (animState == 0)
+            {
+                //Play puru animation
+                Anim_Puru.PlayOneShot();
+                animState++;
+            }
+            else if (animState == 1 && !Anim_Puru.IsPlaying)
+            {
+                //Play crackpuru animation
+                Anim_CrackPuru.PlayOneShot();
+                animState++;
+            }
+            else if (animState == 2 && !Anim_CrackPuru.IsPlaying)
+            {
+                //Play uncrack animation
+                Anim_Uncrack.PlayOneShot();
+                animState++;
+
+                //Spawn new enemy
+                GameObject newEnemy = (GameObject)Instantiate(EnemyPrefab);
+                newEnemy.transform.position = transform.position;
+                SpawnedEnemies.Add(newEnemy.GetComponent<Enemy>());
+            }
+            else if (animState == 3 && !Anim_Uncrack.IsPlaying)
+            {
+                //Return to idle animation
+                Anim_Idle.Play(true);
+                animState++;
+            }*/
+
+            yield return null;
+        }
+        while (animState != 4);     //Loop until animation sequence is complete    
+
+
+        //Re-enable walking animation
+        GetComponent<WalkAnimator>().enabled = true;
+    }    
 }
