@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
         }
 
         //Find closest player within attack range and target them
-        List<PlayerController> possibleTargetsWithinRange = FindObjectsOfType<PlayerController>().Where(p => Vector3.Distance(p.transform.position, transform.position) < TargetDetectionRange).ToList();
+        List<PlayerController> possibleTargetsWithinRange = FindObjectsOfType<PlayerController>().Where(p => p.health > 0).Where(p => Vector3.Distance(p.transform.position, transform.position) < TargetDetectionRange).ToList();
 
         if (possibleTargetsWithinRange.Count > 0)
         {
@@ -202,33 +202,33 @@ public class Enemy : MonoBehaviour
     }
 
     void UpdateMovement()
-    {        
-        if (currentPath == null || PathFindTargetPos == null)
+    {
+        //Check if enemy has reached end of it's path (or lost a path)
+        if (currentPath == null || PathFindTargetPos == null || currentWaypointIndex >= currentPath.vectorPath.Count)
         {
-            return;
+            moveDir = Vector2.zero;
         }
-
-        //Check if enemy has reached end of it's path
-        if (currentWaypointIndex >= currentPath.vectorPath.Count)
+        else
         {
-            return;
+            //Get direction to the next waypoint and move towards it
+            moveDir = (currentPath.vectorPath[currentWaypointIndex] - transform.position).normalized;
         }
 
         //Check if we are close enough to the next waypoint
         //If we are, proceed to follow the next waypoint
-        while (Vector3.Distance(transform.position, currentPath.vectorPath[currentWaypointIndex]) < nextWaypointDistance)
+        if (currentPath != null)
         {
-            currentWaypointIndex++;
-
-            if (currentWaypointIndex >= currentPath.vectorPath.Count)
+            while (Vector3.Distance(transform.position, currentPath.vectorPath[currentWaypointIndex]) < nextWaypointDistance)
             {
-                currentPath = null;
-                return;
+                currentWaypointIndex++;
+
+                if (currentWaypointIndex >= currentPath.vectorPath.Count)
+                {
+                    currentPath = null;
+                    return;
+                }
             }
         }
-
-        //Get direction to the next waypoint and move towards it
-        moveDir = (currentPath.vectorPath[currentWaypointIndex] - transform.position).normalized;
 
         float moveSpeed = 0;
         if (State == EnemyState.PatrolMove)
@@ -241,16 +241,13 @@ public class Enemy : MonoBehaviour
         }
 
         //Move enemy unless it is stunned
-        if (State == EnemyState.PatrolMove || State == EnemyState.ChasingTarget) 
-        {
-            Vector3 Vf = moveDir * moveSpeed;
-            Vector3 Vi = rb.velocity;
+        Vector3 Vf = moveDir * moveSpeed;
+        Vector3 Vi = rb.velocity;
 
-            Vector3 F = (rb.mass * (Vf - Vi)) / 0.05f;               //EUREKA!!!
-            rb.AddForce(F, ForceMode2D.Force);
+        Vector3 F = (rb.mass * (Vf - Vi)) / 0.05f;               //EUREKA!!!
+        rb.AddForce(F, ForceMode2D.Force);
 
             //rb.MovePosition(transform.position + moveDir * moveSpeed * Time.deltaTime);
-        }   
     }
 
     void OnPathFound(Path p)

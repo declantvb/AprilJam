@@ -254,14 +254,14 @@ MonoBehaviour:
   health: 100
   AttackRange: 1.8
   AttackCooldown: 1
-  AttackDamage: 10
+  AttackDamage: 100
   nextWaypointDistance: 0.3
   targetRepathDistanceTolerance: 1
   MinTimeBetweenRepath: 0.2
   TargetDetectionRange: 5
-  PatrolWaitMin: 0.5
-  PatrolWaitMax: 1.5
-  NextPatrolTargetMaxDistance: 3
+  PatrolWaitMin: 1
+  PatrolWaitMax: 7
+  NextPatrolTargetMaxDistance: 4
   MaxTimePatrollingOnePath: 4
   patrolWaitElapsed: 0
   patrolTravelElapsed: 0

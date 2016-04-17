@@ -10,15 +10,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject bulletStart;
 	public bool SwitchingWeapon;
 	private float shootCooldown = 0f;
-
-	[Header("Axes")]
-	public string horizontalAxis = "";
-	public string verticalAxis = "";
-	public string horizontal2Axis = "";
-	public string vertical2Axis = "";
-	public string shootAxis = "";
-	public string WeaponSwitchAxis = "";
-
+    
 	public float speed = 1.0f;
 	private Rigidbody2D rb2d;
 
@@ -29,16 +21,20 @@ public class PlayerController : MonoBehaviour
 	float DamageRedFlashDuration = 0.2f;
 	[SerializeField]
 	ParticleSystem BloodParticles;
+    [SerializeField] GameObject GunHolder;
+    [SerializeField] SpriteAnimation Anim_Death;
 
-	public WeaponDescription[] Weapons = new WeaponDescription[0];
+    public WeaponDescription[] Weapons = new WeaponDescription[0];
 	public int currentWeaponIndex = 0;
 	[SerializeField]
 	public WeaponDescription currentWeapon { get { return currentWeaponIndex < Weapons.Length ? Weapons[currentWeaponIndex] : null; } }
 	public Quaternion rotation;
+    public Controller Controller;
 
+    bool deathAnimFinished = false;
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
 	{
 		shootCooldown = 0f;
 		rb2d = GetComponent<Rigidbody2D>();
@@ -47,29 +43,65 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (health <= 0)
-		{
-			//TODO joe
-		}
+        if (health <= 0)
+        {
+            DestroyImmediate(GetComponentInChildren<WalkAnimator>());
+            DestroyImmediate(GetComponentInChildren<GunMover>());
+            DestroyImmediate(GunHolder);
+            DestroyImmediate(rb2d);
+            
+            foreach(Transform t in GetComponentsInChildren<Transform>())
+            {
+                if (t.GetComponentInChildren<SpriteAnimation>() == null && t.GetComponentInChildren<ParticleSystem>() == null)
+                {
+                    DestroyImmediate(t.gameObject);
+                }
+            }
 
-		if (horizontalAxis != "")
-		{
-			HandleMovement();
+            foreach (Collider2D col in GetComponentsInChildren<Collider2D>())
+            {
+                DestroyImmediate(col);
+            }
+                       
 
-			HandleShooting();
-		}
+            //Do death animation until complete
+            if (!Anim_Death.IsPlaying && !deathAnimFinished)
+            {
+                Anim_Death.PlayOneShot();
+            }
+            else
+            {
+                deathAnimFinished = true;             
+            }
+                                   
+            if (Input.GetAxis(Controller.FireAxis) > 0 && deathAnimFinished)
+            {
+                Controller.Spawn();
+                Destroy(transform.parent.GetComponentInChildren<Camera>().gameObject);
+                Destroy(this);
+            }            
+        }
+        else
+        {
+            if (Controller != null)
+            {
+                HandleMovement();
+
+                HandleShooting();
+            }
+        }
 	}
 
 	private void HandleMovement()
 	{
-		var targetVelocity = (Vector2.right * Input.GetAxis(horizontalAxis) + Vector2.up * -Input.GetAxis(verticalAxis)).normalized * speed;
+		var targetVelocity = (Vector2.right * Input.GetAxis(Controller.HorizontalAxis) + Vector2.up * -Input.GetAxis(Controller.VerticalAxis)).normalized * speed;
 		var delta = targetVelocity - rb2d.velocity;
 		rb2d.MovePosition(rb2d.position + delta * Time.deltaTime);
 	}
 
 	private void HandleShooting()
 	{
-		if (Input.GetAxis(WeaponSwitchAxis) > 0)
+		if (Input.GetAxis(Controller.WeaponSwitchAxis) > 0)
 		{
 			if (!SwitchingWeapon)
 			{
@@ -82,7 +114,7 @@ public class PlayerController : MonoBehaviour
 			SwitchingWeapon = false;
 		}
 
-		Vector2 shootDirection = Vector2.right * -Input.GetAxis(horizontal2Axis) + Vector2.up * Input.GetAxis(vertical2Axis);
+		Vector2 shootDirection = Vector2.right * -Input.GetAxis(Controller.HorizontalAimAxis) + Vector2.up * Input.GetAxis(Controller.VerticalAimAxis);
 
 		if (shootDirection.sqrMagnitude > 0.0f)
 		{
@@ -146,10 +178,10 @@ public class PlayerController : MonoBehaviour
 		health -= damage;
 		StartCoroutine(FlashRed(DamageRedFlashDuration));
 
-		//Play blood particles
-		BloodParticles.transform.forward = hitDirection;
-		BloodParticles.Play();
-	}
+        //Play blood particles
+        BloodParticles.transform.forward = hitDirection;
+        BloodParticles.Play();
+    }
 
 	IEnumerator FlashRed(float duration)
 	{

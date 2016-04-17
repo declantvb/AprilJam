@@ -26,20 +26,20 @@ public class Controller : MonoBehaviour
 	void Update()
 	{
 		if (!bound && Input.GetAxis(FireAxis) > 0)
-		{
-			var player = inputMaster.NextAvailablePlayer();
-			var avatar = player.GetComponentInChildren<PlayerController>();
-			avatar.horizontalAxis = HorizontalAxis;
-			avatar.verticalAxis = VerticalAxis;
-			avatar.horizontal2Axis = HorizontalAimAxis;
-			avatar.vertical2Axis = VerticalAimAxis;
-			avatar.shootAxis = FireAxis;
-			avatar.WeaponSwitchAxis = WeaponSwitchAxis;
-			var camera = player.GetComponentInChildren<CameraController>();
-			camera.updateCameraViewport(ViewportRect);
+        {
+            Spawn();
+            bound = true;
+        }
+    }
 
-			gameMaster.Lives--;
-			bound = true;
-		}
-	}
+    public void Spawn()
+    {
+        var player = inputMaster.NextAvailablePlayer();
+        var avatar = player.GetComponentInChildren<PlayerController>();
+        avatar.Controller = this;
+        var camera = player.GetComponentInChildren<CameraController>();
+        camera.updateCameraViewport(ViewportRect);
+
+        gameMaster.Lives--;        
+    }
 }

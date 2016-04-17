@@ -64,6 +64,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &139198
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 490624}
+  - 114: {fileID: 11499956}
+  m_Layer: 0
+  m_Name: Anim_Death
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &162092
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +130,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &174624
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 410960}
+  m_Layer: 0
+  m_Name: Animations
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &177276
 GameObject:
   m_ObjectHideFlags: 1
@@ -143,6 +174,7 @@ GameObject:
   - 114: {fileID: 11420002}
   - 212: {fileID: 21245454}
   - 114: {fileID: 11470602}
+  - 114: {fileID: 11462742}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -164,6 +196,19 @@ Transform:
   - {fileID: 437728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &410960
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 490624}
+  m_Father: {fileID: 437728}
+  m_RootOrder: 4
 --- !u!4 &435582
 Transform:
   m_ObjectHideFlags: 1
@@ -190,6 +235,7 @@ Transform:
   - {fileID: 469228}
   - {fileID: 462848}
   - {fileID: 480698}
+  - {fileID: 410960}
   m_Father: {fileID: 406774}
   m_RootOrder: 1
 --- !u!4 &451682
@@ -266,6 +312,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 437728}
   m_RootOrder: 3
+--- !u!4 &490624
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 410960}
+  m_RootOrder: 0
 --- !u!20 &2080096
 Camera:
   m_ObjectHideFlags: 1
@@ -373,16 +431,12 @@ MonoBehaviour:
   health: 100
   bulletStart: {fileID: 163112}
   SwitchingWeapon: 0
-  horizontalAxis: 
-  verticalAxis: 
-  horizontal2Axis: 
-  vertical2Axis: 
-  shootAxis: 
-  WeaponSwitchAxis: 
   speed: 5
   PlayerSprite: {fileID: 21245454}
   DamageRedFlashDuration: 0.2
   BloodParticles: {fileID: 19810832}
+  GunHolder: {fileID: 171064}
+  Anim_Death: {fileID: 11499956}
   Weapons:
   - BulletPrefab: {fileID: 199206, guid: 9a3ca72efc27d4740b30ec48b18ecbcf, type: 2}
     Type: 0
@@ -400,6 +454,7 @@ MonoBehaviour:
     Accuracy: 0.05
   currentWeaponIndex: 0
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  Controller: {fileID: 0}
 --- !u!114 &11420002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,6 +488,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1abe3ea16e37744a630bee6c3b7be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11462742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0949366396f87624e8195956257857f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: 0
+  CurrentSortOrder: 208
 --- !u!114 &11470602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,6 +556,27 @@ MonoBehaviour:
   animationPlayingForward: 1
   isPlayer: 0
   speed: 1.5
+--- !u!114 &11499956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ccbe53e4b6f544e9375cc3fc32ace4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 21245454}
+  AnimationCells:
+  - {fileID: 21300064, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
+  - {fileID: 21300066, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
+  - {fileID: 21300068, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
+  - {fileID: 21300070, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
+  FrameDelay: 0.2
+  currentFrame: 0
+  Playing: 0
+  OneShotting: 0
 --- !u!124 &12402530
 Behaviour:
   m_ObjectHideFlags: 1
@@ -2075,7 +2164,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 208
   m_Sprite: {fileID: 21300000, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
