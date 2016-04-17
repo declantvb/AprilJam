@@ -104,7 +104,7 @@ public class EnemySpawner : MonoBehaviour
         state = 0;
 
         //Halt idle animation
-        Anim_Idle.Play(false);
+        Anim_Idle.Stop();
 
         do
         {
@@ -138,7 +138,7 @@ public class EnemySpawner : MonoBehaviour
             else if (state == 3 && !Anim_Uncrack.IsPlaying)
             {
                 //Return to idle animation
-                Anim_Idle.Play(true);
+                Anim_Idle.Play();
                 state++;
             }
 

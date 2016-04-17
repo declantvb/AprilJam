@@ -48,11 +48,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] SpriteAnimation Anim_Death;
 
     [Header("Pounce Attack")]
-    [SerializeField] SpriteAnimation Anim_Pounce_Up;
-    [SerializeField] SpriteAnimation Anim_Pounce_Down;
-    [SerializeField] SpriteAnimation Anim_Pounce_Left;
-    [SerializeField] SpriteAnimation Anim_Pounce_Right;
-    [SerializeField] AnimationCurve PounceForceVsTime;
+    [SerializeField] SpriteAnimation[] Anim_Pounce_Up;
+    [SerializeField] SpriteAnimation[] Anim_Pounce_Down;
+    [SerializeField] SpriteAnimation[] Anim_Pounce_Left;
+    [SerializeField] SpriteAnimation[] Anim_Pounce_Right;
+    [SerializeField] float PounceForce = 200f;
+    [SerializeField] float PounceDelay = 0.5f;
+    [SerializeField] float PounceDuration = 0.5f;
+    [SerializeField] float MidairDrag = 0.1f;
+    [SerializeField] float PounceCooldown = 0.8f;
 
     int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
     Path currentPath;    
@@ -61,6 +65,8 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Seeker seeker;
     Vector3 moveDir;
+
+    bool killer = false;
     
 	void Start()
     {
@@ -146,28 +152,31 @@ public class Enemy : MonoBehaviour
             attackCooldownElapsed += Time.deltaTime;
             if (attackCooldownElapsed >= AttackCooldown && closestDistance < AttackRange)
             {
+                attackCooldownElapsed = 0;
                 if (State != EnemyState.Pouncing)
                 {
-                    //StartCoroutine(PounceAttack());
-                }                
-                attackCooldownElapsed = 0;
+                    StartCoroutine(PounceAttack());
+                }           
             }
 
-            //Calculate distance from last target position        
-            float targetMoveDistance = float.MaxValue;
-
-            if (currentPath != null)
+            if (State != EnemyState.Pouncing)
             {
-                targetMoveDistance = Vector3.Distance(PathFindTargetPos, currentPath.vectorPath[currentPath.vectorPath.Count - 1]);
-            }
+                //Calculate distance from last target position        
+                float targetMoveDistance = float.MaxValue;
 
-            if (!calculatingPath && targetMoveDistance > targetRepathDistanceTolerance && timeSinceRepath >= MinTimeBetweenRepath)
-            {
-                seeker.StartPath(transform.position, PathFindTargetPos, OnPathFound);
-                calculatingPath = true;
-            }
+                if (currentPath != null)
+                {
+                    targetMoveDistance = Vector3.Distance(PathFindTargetPos, currentPath.vectorPath[currentPath.vectorPath.Count - 1]);
+                }
 
-            State = EnemyState.ChasingTarget;
+                if (!calculatingPath && targetMoveDistance > targetRepathDistanceTolerance && timeSinceRepath >= MinTimeBetweenRepath)
+                {
+                    seeker.StartPath(transform.position, PathFindTargetPos, OnPathFound);
+                    calculatingPath = true;
+                }
+
+                State = EnemyState.ChasingTarget;
+            }
         }
         else
         {
@@ -258,13 +267,17 @@ public class Enemy : MonoBehaviour
         {
             moveSpeed = MoveSpeed_Chasing;
         }
-                
-        //Move enemy unless it is stunned
-        Vector3 Vf = moveDir * moveSpeed;
-        Vector3 Vi = rb.velocity;
 
-        Vector3 F = (rb.mass * (Vf - Vi)) / 0.05f;               //EUREKA!!!
-        rb.AddForce(F, ForceMode2D.Force);
+        if (State != EnemyState.Pouncing)
+        {
+
+            //Move enemy unless it is stunned
+            Vector3 Vf = moveDir * moveSpeed;
+            Vector3 Vi = rb.velocity;
+
+            Vector3 F = (rb.mass * (Vf - Vi)) / 0.05f;               //EUREKA!!!
+            rb.AddForce(F, ForceMode2D.Force);
+        }
 
         //rb.MovePosition(transform.position + moveDir * moveSpeed * Time.deltaTime);
     }
@@ -333,12 +346,7 @@ public class Enemy : MonoBehaviour
 
         Sprite.color = startColor;
     }    
-
-    void DoAttack(PlayerController playerToAttack)
-    {
-        playerToAttack.Hit(AttackDamage, (playerToAttack.transform.position - transform.position).normalized, 0f);
-    }
-
+    
     public enum EnemyState
     {
         PatrolWait,
@@ -353,50 +361,121 @@ public class Enemy : MonoBehaviour
     {
         State = EnemyState.Pouncing;
 
+        //Stop
+        rb.velocity = Vector2.zero;
+
         //Halt walk animation
         GetComponent<WalkAnimator>().enabled = false;
-        
+
+        Vector2 pounceDir = (PathFindTargetPos - transform.position).normalized;
+
         SpriteAnimation currentPounceAnim;
-        if (Mathf.Abs(rb.velocity.y) >= Mathf.Abs(rb.velocity.x))//We are moving up or down
-        {
-            if (rb.velocity.y >= 0)//We are moving up
-            {
-                currentPounceAnim = Anim_Pounce_Up;                
-            }
-            else//We are moving down
-            {
-                currentPounceAnim = Anim_Pounce_Down;
-            }
-        }
-        else //We are moving left or right
-        {
-            if (rb.velocity.x >= 0)//We are moving to the right
-            {
-                currentPounceAnim = Anim_Pounce_Right;
-            }
-            else//We are moving to the left
-            {
-                currentPounceAnim = Anim_Pounce_Left;
-            }
-        }
+        currentPounceAnim = SetPounceAnimation(pounceDir, 0);
 
         //Start pounce anim
         currentPounceAnim.PlayOneShot();
 
+        float elapsed = 0;
+
+        //Delay before pounce force
         do
-        {                  
-            //Add force in direction of pounce
-
-
+        {
+            elapsed += Time.deltaTime;
             yield return null;
         }
-        while (currentPounceAnim.IsPlaying);     //Loop until animation sequence is complete    
+        while (elapsed < PounceDelay);
 
+        // Update in case player has moved
+        pounceDir = (PathFindTargetPos - transform.position).normalized;
+
+        // Update animation
+        currentPounceAnim.Stop();
+        currentPounceAnim = SetPounceAnimation(pounceDir, 1);
+        currentPounceAnim.Play();
+
+        // Kill on touch
+        killer = true;
+
+        //Add force in direction of pounce
+        rb.AddForce(pounceDir * PounceForce, ForceMode2D.Impulse);
+
+        /////////////////////////////////
+        //GetComponent<SpriteRenderer>().color = Color.blue;
+
+        //Reduce drag while enemy is in air
+        float normalDrag = rb.drag;
+        rb.drag = MidairDrag;
+
+        //Delay for pounce length
+        yield return new WaitForSeconds(PounceDuration); // TODO: exit prematurely if we hit something
+
+        /////////////////////////////////
+       // GetComponent<SpriteRenderer>().color = Color.black;
+
+        //Stop
+        rb.velocity = Vector2.zero;
+
+        //Play landing animation
+        currentPounceAnim.Stop();
+        currentPounceAnim = SetPounceAnimation(pounceDir, 2);
+        currentPounceAnim.PlayOneShot();
+
+
+        // 'es 'armless
+        killer = false;
+
+        //Wait until landing is finished
+        while (currentPounceAnim.IsPlaying) yield return null;
+
+        /////////////////////////////////
+        //GetComponent<SpriteRenderer>().color = Color.white;
+
+        //Return drag to normal when anim is finished
+        rb.drag = normalDrag;
 
         //Re-enable walking animation
         GetComponent<WalkAnimator>().enabled = true;
 
         //Return to patrol state
         State = EnemyState.PatrolWait;
-    }    
+    }
+
+    private SpriteAnimation SetPounceAnimation(Vector2 pounceDir, int animationPhase)
+    {
+        SpriteAnimation currentPounceAnim;
+        if (Mathf.Abs(pounceDir.y) >= Mathf.Abs(pounceDir.x))//We are moving up or down
+        {
+            if (rb.velocity.y >= 0)//We are moving up
+            {
+                currentPounceAnim = Anim_Pounce_Up[animationPhase];
+            }
+            else//We are moving down
+            {
+                currentPounceAnim = Anim_Pounce_Down[animationPhase];
+            }
+        }
+        else //We are moving left or right
+        {
+            if (pounceDir.x >= 0)//We are moving to the right
+            {
+                currentPounceAnim = Anim_Pounce_Right[animationPhase];
+            }
+            else//We are moving to the left
+            {
+                currentPounceAnim = Anim_Pounce_Left[animationPhase];
+            }
+        }
+
+        return currentPounceAnim;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        PlayerController hitPlayer = col.collider.GetComponentInParent<PlayerController>();
+        if (hitPlayer != null && killer)
+        {
+            //Enemy has hit a player while pouncing. Inflict damage
+            hitPlayer.Hit(AttackDamage, (hitPlayer.transform.position - transform.position).normalized, 0f);
+        }
+    }
 }

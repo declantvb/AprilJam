@@ -50,9 +50,16 @@ public class SpriteAnimation : MonoBehaviour
         }
     }
 
-    public void Play(bool isPlaying)
+    public void Play()
     {
-        Playing = isPlaying;
+        Playing = true;
+        OneShotting = false;
+    }
+
+    public void Stop()
+    {
+        Playing = false;
+        OneShotting = false;
     }
 
     public void PlayOneShot()
