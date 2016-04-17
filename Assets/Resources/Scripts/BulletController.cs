@@ -41,8 +41,14 @@ public class BulletController : MonoBehaviour
 		var enemy = other.GetComponent<Enemy>();
 		if (enemy != null)
 		{
-			enemy.Hit(damage, transform.up, knockbackForce);            
+			enemy.Hit(damage, transform.up, knockbackForce);
 		}
-        Destroy(gameObject);
+
+		var enemySpawner = other.GetComponent<EnemySpawner>();
+		if (enemySpawner != null)
+		{
+			enemySpawner.Hit(damage, transform.up, knockbackForce);
+		}
+		Destroy(gameObject);
 	}
 }

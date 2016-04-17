@@ -4,7 +4,13 @@ using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject EnemyPrefab;
+	[Header("Combat")]
+	public float health = 100f;
+	[SerializeField] float DamageRedFlashDuration = 0.2f;
+    [SerializeField] SpriteRenderer Sprite;
+	[SerializeField] ParticleSystem BloodParticles;
+
+	[SerializeField] GameObject EnemyPrefab;
     [SerializeField] float MinSpawnDelay = 3f;
     [SerializeField] float MaxSpawnDelay = 5f;
     float spawnElapsed;
@@ -16,26 +22,78 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] SpriteAnimation Anim_Idle;
     [SerializeField] SpriteAnimation Anim_Puru;
     [SerializeField] SpriteAnimation Anim_CrackPuru;
-    [SerializeField] SpriteAnimation Anim_Uncrack;
+	[SerializeField] SpriteAnimation Anim_Uncrack;
+	[SerializeField] SpriteAnimation Anim_Die;
     [SerializeField] int state;
+	private bool dying;
 
-    void Start()
+	void Start()
     {
         nextSpawnDelay = Random.Range(MinSpawnDelay, MaxSpawnDelay);
-    }
+		Sprite = GetComponent<SpriteRenderer>();
+	}
     
     void Update()
     {
-        spawnElapsed += Time.deltaTime;
-        if (spawnElapsed >= nextSpawnDelay)
-        {
-            spawnElapsed = 0;
-            nextSpawnDelay = Random.Range(MinSpawnDelay, MaxSpawnDelay);
-            StartCoroutine(HatchNewEnemy());            
-        }      
+		if (health <= 0)
+		{
+			if (!dying)
+			{
+				Anim_Die.PlayOneShot(); 
+			}
+			dying = true;
+		}
+		else
+		{
+			spawnElapsed += Time.deltaTime;
+			if (spawnElapsed >= nextSpawnDelay)
+			{
+				spawnElapsed = 0;
+				nextSpawnDelay = Random.Range(MinSpawnDelay, MaxSpawnDelay);
+				StartCoroutine(HatchNewEnemy());
+			}
+		}
     }
+	
+	internal void Hit(float damage, Vector3 hitDirection, float hitForce)
+	{
+		health -= damage;
+		StartCoroutine(FlashRed(DamageRedFlashDuration));
 
-    IEnumerator HatchNewEnemy()
+		//Play blood particles
+		BloodParticles.transform.forward = hitDirection;
+		BloodParticles.Play();
+	}
+
+	IEnumerator FlashRed(float duration)
+	{
+		float elapsed = 0;
+		Color startColor = new Color(1, 1, 1);
+		Color endColor = new Color(1, 0, 0);
+		float t = 0;
+
+		do
+		{
+			elapsed += Time.deltaTime;
+			t = elapsed / duration;
+
+			if (t < 0.5f)
+			{
+				Sprite.color = Color.Lerp(startColor, endColor, t * 2f);
+			}
+			else
+			{
+				Sprite.color = Color.Lerp(endColor, startColor, t * 2f);
+			}
+
+			yield return null;
+		}
+		while (t < 1f);
+
+		Sprite.color = startColor;
+	}
+
+	IEnumerator HatchNewEnemy()
     {
         state = 0;
 
@@ -44,7 +102,11 @@ public class EnemySpawner : MonoBehaviour
 
         do
         {
-            if (state == 0)
+			if (health <= 0)
+			{
+				break;
+			}
+			else if (state == 0)
             {
                 //Play puru animation
                 Anim_Puru.PlayOneShot();
