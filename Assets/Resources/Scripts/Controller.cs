@@ -9,14 +9,16 @@ public class Controller : MonoBehaviour
 	public string VerticalAimAxis;
 	public string FireAxis;
 	public string WeaponSwitchAxis;
-	public Rect ViewportRect;
+    public string ShowMapAxis;
+    public Rect ViewportRect;
 
 	public bool bound = false;
 	public InputController inputMaster;
 	public GameController gameMaster;
 
-	// Use this for initialization
-	void Start()
+
+    // Use this for initialization
+    void Start()
 	{
 		inputMaster = GetComponentInParent<InputController>();
 		gameMaster = FindObjectOfType<GameController>();

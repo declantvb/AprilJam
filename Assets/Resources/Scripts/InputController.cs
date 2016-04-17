@@ -37,6 +37,7 @@ public class InputController : MonoBehaviour
 			controller.VerticalAimAxis = R_YAxis + inputIndex;
 			controller.FireAxis = RBButton + inputIndex;
 			controller.WeaponSwitchAxis = AButton + inputIndex;
+            controller.ShowMapAxis = BButton + inputIndex;
 			controller.ViewportRect = new Rect(0.5f * (i / 2), 0.5f * (i % 2), 0.5f, 0.5f);
 		}
 	}
