@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
 	public int StartLives;
 	public int Lives;
 	public GameState CurrentState;
-	
+
+    public List<PlayerController> ActivePlayers = new List<PlayerController>();
+    private float checkTime = 0;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -16,7 +21,16 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (FindObjectsOfType<PlayerController>().Length == 0 && Lives <= 0) // no players and no lives
+        if (checkTime <= 0)
+        {
+            ActivePlayers = FindObjectsOfType<PlayerController>().ToList();
+            checkTime = 2;
+        }
+        checkTime -= Time.deltaTime;
+
+        ActivePlayers = ActivePlayers.Where(p => p != null).ToList();
+
+        if (ActivePlayers.Count == 0 && Lives <= 0) // no players and no lives
 		{
 			CurrentState = GameState.Menu;
 		}

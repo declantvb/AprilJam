@@ -67,12 +67,17 @@ public class Enemy : MonoBehaviour
     Vector3 moveDir;
 
     bool killer = false;
-    
-	void Start()
+    private List<GameObject> targets;
+    private GameController gameController;
+
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
         Sprite = GetComponent<SpriteRenderer>();
+
+        targets = new List<GameObject>();
+        gameController = FindObjectOfType<GameController>();
     }
 
 	void Update()
@@ -129,15 +134,17 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        UpdateTargets();
+
         //Find closest player within attack range and target them
-        List<PlayerController> possibleTargetsWithinRange = FindObjectsOfType<PlayerController>().Where(p => p.health > 0).Where(p => Vector3.Distance(p.transform.position, transform.position) < TargetDetectionRange).ToList();
+        List<GameObject> possibleTargetsWithinRange = targets.Where(p => Vector3.Distance(p.transform.position, transform.position) < TargetDetectionRange).ToList();
 
         if (possibleTargetsWithinRange.Count > 0)
         {
             float closestDistance = float.MaxValue;
-            PlayerController closestPlayer = null;
+            GameObject closestPlayer = null;
 
-            foreach (PlayerController player in possibleTargetsWithinRange)
+            foreach (GameObject player in possibleTargetsWithinRange)
             {
                 float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
                 if (distanceToPlayer < closestDistance)
@@ -227,6 +234,11 @@ public class Enemy : MonoBehaviour
                 State = EnemyState.PatrolWait;
             }
         }
+    }
+
+    private void UpdateTargets()
+    {
+        targets = gameController.ActivePlayers.Where(p => p != null).Select(a => a.gameObject).ToList();
     }
 
     void UpdateMovement()
@@ -445,7 +457,7 @@ public class Enemy : MonoBehaviour
         SpriteAnimation currentPounceAnim;
         if (Mathf.Abs(pounceDir.y) >= Mathf.Abs(pounceDir.x))//We are moving up or down
         {
-            if (rb.velocity.y >= 0)//We are moving up
+            if (pounceDir.y >= 0)//We are moving up
             {
                 currentPounceAnim = Anim_Pounce_Up[animationPhase];
             }
