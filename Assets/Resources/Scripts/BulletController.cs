@@ -38,26 +38,29 @@ public class BulletController : MonoBehaviour
 	}
 
 	public void DoDamageTo(Collider2D other, float damage, Vector3 direction)
-	{
-		if (Owner.GetComponent<PlayerController>() == null)
-		{
-			var player = other.GetComponent<PlayerController>();
-			if (player != null)
-			{
-				player.Hit(damage, direction, knockbackForce);
-			}
-		}
+    {
+        var enemy = other.GetComponent<Enemy>();
+        var enemySpawner = other.GetComponent<EnemySpawner>();
 
-		var enemy = other.GetComponent<Enemy>();
-		if (enemy != null)
-		{
-			enemy.Hit(damage, direction, knockbackForce);
-		}
-
-		var enemySpawner = other.GetComponent<EnemySpawner>();
-		if (enemySpawner != null)
-		{
-			enemySpawner.Hit(damage, direction, knockbackForce);
-		}
+        if (Owner.GetComponent<PlayerController>() == null)
+        {
+            var player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.Hit(damage, direction, knockbackForce);
+            }
+        } else if (enemy != null)
+        {
+            enemy.Hit(damage, direction, knockbackForce);
+            SoundEffects.Singleton.Play("Bullet Hit Alien");
+        } else if (enemySpawner != null)
+        {
+            enemySpawner.Hit(damage, direction, knockbackForce);
+            SoundEffects.Singleton.Play("Bullet Hit Alien");
+        }
+        else
+        {
+            SoundEffects.Singleton.Play("Bullet Hit Wall");
+        }
 	}
 }

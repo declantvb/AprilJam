@@ -42,7 +42,9 @@ public class EnemySpawner : MonoBehaviour
 			{
 				Anim_Die.PlayOneShot(); 
 				dead = true;
-			}
+
+                SoundEffects.Singleton.Play("Egg Burst");
+            }
 			else
 			{
 				spawnElapsed += Time.deltaTime;

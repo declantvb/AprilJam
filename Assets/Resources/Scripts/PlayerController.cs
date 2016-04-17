@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
             if (!Anim_Death.IsPlaying && !deathAnimFinished)
             {
                 Anim_Death.PlayOneShot();
+
+                SoundEffects.Singleton.Play("Player Death");
             }
             else
             {
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetAxis(Controller.FireAxis) > 0 && deathAnimFinished)
             {
                 Controller.Spawn();
+                SoundEffects.Singleton.Play("Respawn");
                 Destroy(transform.parent.GetComponentInChildren<Camera>().gameObject);
                 Destroy(this);
             }            
@@ -144,7 +147,7 @@ public class PlayerController : MonoBehaviour
 		switch (currentWeapon.Type)
 		{
 			case WeaponType.Auto:
-				MakeBullets(currentWeapon, bulletStart.transform.position, bulletStart.transform.rotation);
+                MakeBullets(currentWeapon, bulletStart.transform.position, bulletStart.transform.rotation);
 				break;
 			case WeaponType.Shotgun:
 				MakeBullets(currentWeapon, bulletStart.transform.position, bulletStart.transform.rotation);
@@ -154,7 +157,9 @@ public class PlayerController : MonoBehaviour
 				break;
 		}
 
-		shootCooldown = currentWeapon.Cooldown;
+        SoundEffects.Singleton.Play("Gun Shot");
+
+        shootCooldown = currentWeapon.Cooldown;
 	}
 
 	private void MakeBullets(WeaponDescription weapon, Vector3 position, Quaternion rotation)

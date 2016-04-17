@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 444116}
   - 114: {fileID: 11425292}
+  - 81: {fileID: 8131726}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -28,6 +29,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!81 &8131726
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120954}
+  m_Enabled: 1
 --- !u!114 &11425292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,6 +50,7 @@ MonoBehaviour:
   StartLives: 50
   Lives: 50
   CurrentState: 0
+  ActivePlayers: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

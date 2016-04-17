@@ -98,6 +98,8 @@ public class Enemy : MonoBehaviour
                 Destroy(GetComponent<CircleCollider2D>());
 
                 Anim_Death.PlayOneShot();
+
+                SoundEffects.Singleton.Play("Alien Death");
             }
             else
             {
@@ -403,7 +405,7 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
         while (elapsed < PounceDelay);
-
+        
         //Check if enemy was killed
         if (health > 0)
         {
@@ -417,6 +419,7 @@ public class Enemy : MonoBehaviour
 
             // Kill on touch
             killer = true;
+            SoundEffects.Singleton.Play("Alien Attack");
 
             //Add force in direction of pounce                
             rb.AddForce(pounceDir * PounceForce, ForceMode2D.Impulse);
