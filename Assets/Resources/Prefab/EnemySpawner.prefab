@@ -318,8 +318,8 @@ MonoBehaviour:
   dead: 0
   DeadPrefab: {fileID: 122392, guid: fd0f6b81990bdab4084f46834b20c817, type: 2}
   EnemyPrefab: {fileID: 192802, guid: bdbe829396090cb499de92a23e60f4ef, type: 2}
-  MinSpawnDelay: 3
-  MaxSpawnDelay: 10
+  MinSpawnDelay: 10
+  MaxSpawnDelay: 30
   Anim_Idle: {fileID: 11433342}
   Anim_Puru: {fileID: 11480430}
   Anim_CrackPuru: {fileID: 11401492}
