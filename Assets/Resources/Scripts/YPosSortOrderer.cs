@@ -10,7 +10,7 @@ public class YPosSortOrderer : MonoBehaviour
         
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     
     void Update()
