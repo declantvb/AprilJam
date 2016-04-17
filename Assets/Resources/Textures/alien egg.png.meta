@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 135000c6f8f099e4e8416d089f127d44
-timeCreated: 1460843910
+timeCreated: 1460865943
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -24,6 +24,10 @@ TextureImporter:
     21300034: alien egg_17
     21300036: alien egg_18
     21300038: alien egg_19
+    21300040: alien egg_20
+    21300042: alien egg_21
+    21300044: alien egg_22
+    21300046: alien egg_23
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -442,6 +446,78 @@ TextureImporter:
         - {x: 13, y: -9}
         - {x: 13, y: 12}
         - {x: 9, y: 14}
+    - name: alien egg_20
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -3, y: 14}
+        - {x: -13, y: 9}
+        - {x: -13, y: -10}
+        - {x: -9, y: -14}
+        - {x: 11, y: -14}
+        - {x: 13, y: -9}
+        - {x: 13, y: 12}
+        - {x: 9, y: 14}
+    - name: alien egg_21
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 15}
+        - {x: -13, y: 8}
+        - {x: -13, y: -14}
+        - {x: 6, y: -14}
+        - {x: 13, y: -12}
+        - {x: 13, y: 14}
+        - {x: 12, y: 15}
+    - name: alien egg_22
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 12}
+        - {x: -13, y: -14}
+        - {x: 9, y: -14}
+        - {x: 14, y: -12}
+        - {x: 14, y: 8}
+        - {x: 12, y: 12}
+        - {x: 3, y: 15}
+    - name: alien egg_23
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 9}
+        - {x: -16, y: 6}
+        - {x: -16, y: -15}
+        - {x: -15, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 9}
     outline: []
   spritePackingTag: 
   userData: 

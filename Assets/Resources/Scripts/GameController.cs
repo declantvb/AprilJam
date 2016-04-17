@@ -28,8 +28,6 @@ public class GameController : MonoBehaviour
         }
         checkTime -= Time.deltaTime;
 
-        ActivePlayers = ActivePlayers.Where(p => p != null).ToList();
-
         if (ActivePlayers.Count == 0 && Lives <= 0) // no players and no lives
 		{
 			CurrentState = GameState.Menu;
