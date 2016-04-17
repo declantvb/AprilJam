@@ -393,63 +393,82 @@ public class Enemy : MonoBehaviour
         do
         {
             elapsed += Time.deltaTime;
+
+            //Check if enemy was killed
+            if (health <= 0)
+            {
+                break;
+            }
+
             yield return null;
         }
         while (elapsed < PounceDelay);
 
-        // Update in case player has moved
-        pounceDir = (PathFindTargetPos - transform.position).normalized;
+        //Check if enemy was killed
+        if (health > 0)
+        {
+            // Update in case player has moved
+            pounceDir = (PathFindTargetPos - transform.position).normalized;
 
-        // Update animation
-        currentPounceAnim.Stop();
-        currentPounceAnim = SetPounceAnimation(pounceDir, 1);
-        currentPounceAnim.Play();
+            // Update animation
+            currentPounceAnim.Stop();
+            currentPounceAnim = SetPounceAnimation(pounceDir, 1);
+            currentPounceAnim.Play();
 
-        // Kill on touch
-        killer = true;
+            // Kill on touch
+            killer = true;
 
-        //Add force in direction of pounce
-        rb.AddForce(pounceDir * PounceForce, ForceMode2D.Impulse);
+            //Add force in direction of pounce                
+            rb.AddForce(pounceDir * PounceForce, ForceMode2D.Impulse);
 
-        /////////////////////////////////
-        //GetComponent<SpriteRenderer>().color = Color.blue;
+            /////////////////////////////////
+            //GetComponent<SpriteRenderer>().color = Color.blue;
 
-        //Reduce drag while enemy is in air
-        float normalDrag = rb.drag;
-        rb.drag = MidairDrag;
-
-        //Delay for pounce length
-        yield return new WaitForSeconds(PounceDuration); // TODO: exit prematurely if we hit something
-
-        /////////////////////////////////
-       // GetComponent<SpriteRenderer>().color = Color.black;
-
-        //Stop
-        rb.velocity = Vector2.zero;
-
-        //Play landing animation
-        currentPounceAnim.Stop();
-        currentPounceAnim = SetPounceAnimation(pounceDir, 2);
-        currentPounceAnim.PlayOneShot();
+            //Reduce drag while enemy is in air
+            float normalDrag = rb.drag;
+            rb.drag = MidairDrag;
 
 
-        // 'es 'armless
-        killer = false;
+            //Delay for pounce length
+            yield return new WaitForSeconds(PounceDuration); // TODO: exit prematurely if we hit something
 
-        //Wait until landing is finished
-        while (currentPounceAnim.IsPlaying) yield return null;
+            //Check if enemy was killed
+            if (health > 0)
+            {
+                /////////////////////////////////
+                // GetComponent<SpriteRenderer>().color = Color.black;
 
-        /////////////////////////////////
-        //GetComponent<SpriteRenderer>().color = Color.white;
+                //Stop
+                rb.velocity = Vector2.zero;
 
-        //Return drag to normal when anim is finished
-        rb.drag = normalDrag;
+                //Play landing animation
+                currentPounceAnim.Stop();
+                currentPounceAnim = SetPounceAnimation(pounceDir, 2);
+                currentPounceAnim.PlayOneShot();
+                
+                // 'es 'armless
+                killer = false;
+                
+                //Wait until landing is finished
+                while (currentPounceAnim.IsPlaying) yield return null;
 
-        //Re-enable walking animation
-        GetComponent<WalkAnimator>().enabled = true;
+                //Check if enemy was killed
+                if (health > 0)
+                {
+                    /////////////////////////////////
+                    //GetComponent<SpriteRenderer>().color = Color.white;
 
-        //Return to patrol state
-        State = EnemyState.PatrolWait;
+                    //Return drag to normal when anim is finished
+                    rb.drag = normalDrag;
+
+                    //Re-enable walking animation
+                    GetComponent<WalkAnimator>().enabled = true;
+
+                    //Return to patrol state
+                    State = EnemyState.PatrolWait;
+                }
+            }
+        }
     }
 
     private SpriteAnimation SetPounceAnimation(Vector2 pounceDir, int animationPhase)
