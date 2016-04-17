@@ -394,7 +394,7 @@ MonoBehaviour:
   AttackDamage: 100
   nextWaypointDistance: 0.3
   targetRepathDistanceTolerance: 1
-  MinTimeBetweenRepath: 60
+  MinTimeBetweenRepath: 0.2
   TargetDetectionRange: 5
   PatrolWaitMin: 1
   PatrolWaitMax: 7
@@ -410,11 +410,16 @@ MonoBehaviour:
   DamageStunTime: 0.5
   BloodParticles: {fileID: 19810198}
   Anim_Death: {fileID: 11431772}
-  animState: 0
   Anim_Pounce_Up: {fileID: 11452528}
   Anim_Pounce_Down: {fileID: 11450862}
   Anim_Pounce_Left: {fileID: 11446144}
   Anim_Pounce_Right: {fileID: 11448638}
+  PounceForceVsTime:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &11446144
 MonoBehaviour:
   m_ObjectHideFlags: 1

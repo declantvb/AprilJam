@@ -47,11 +47,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] SpriteAnimation Anim_Death;
 
     [Header("Pounce Attack")]
-    [SerializeField] int animState = 0;
     [SerializeField] SpriteAnimation Anim_Pounce_Up;
     [SerializeField] SpriteAnimation Anim_Pounce_Down;
     [SerializeField] SpriteAnimation Anim_Pounce_Left;
     [SerializeField] SpriteAnimation Anim_Pounce_Right;
+    [SerializeField] AnimationCurve PounceForceVsTime;
 
     int currentWaypointIndex = 0;            //The waypoint we are currently moving towards
     Path currentPath;    
@@ -140,7 +140,10 @@ public class Enemy : MonoBehaviour
             attackCooldownElapsed += Time.deltaTime;
             if (attackCooldownElapsed >= AttackCooldown && closestDistance < AttackRange)
             {
-                DoAttack(closestPlayer);
+                if (State != EnemyState.Pouncing)
+                {
+                    //StartCoroutine(PounceAttack());
+                }                
                 attackCooldownElapsed = 0;
             }
 
@@ -335,14 +338,14 @@ public class Enemy : MonoBehaviour
         PatrolWait,
         PatrolMove,
         ChasingTarget,
-        Attacking,
+        Pouncing,
         Stunned,
         Dead
     }
 
     IEnumerator PounceAttack()
     {
-        animState = 0;
+        State = EnemyState.Pouncing;
 
         //Halt walk animation
         GetComponent<WalkAnimator>().enabled = false;
@@ -370,45 +373,24 @@ public class Enemy : MonoBehaviour
                 currentPounceAnim = Anim_Pounce_Left;
             }
         }
-                
-        do
-        {/*
-            if (animState == 0)
-            {
-                //Play puru animation
-                Anim_Puru.PlayOneShot();
-                animState++;
-            }
-            else if (animState == 1 && !Anim_Puru.IsPlaying)
-            {
-                //Play crackpuru animation
-                Anim_CrackPuru.PlayOneShot();
-                animState++;
-            }
-            else if (animState == 2 && !Anim_CrackPuru.IsPlaying)
-            {
-                //Play uncrack animation
-                Anim_Uncrack.PlayOneShot();
-                animState++;
 
-                //Spawn new enemy
-                GameObject newEnemy = (GameObject)Instantiate(EnemyPrefab);
-                newEnemy.transform.position = transform.position;
-                SpawnedEnemies.Add(newEnemy.GetComponent<Enemy>());
-            }
-            else if (animState == 3 && !Anim_Uncrack.IsPlaying)
-            {
-                //Return to idle animation
-                Anim_Idle.Play(true);
-                animState++;
-            }*/
+        //Start pounce anim
+        currentPounceAnim.PlayOneShot();
+
+        do
+        {                  
+            //Add force in direction of pounce
+
 
             yield return null;
         }
-        while (animState != 4);     //Loop until animation sequence is complete    
+        while (currentPounceAnim.IsPlaying);     //Loop until animation sequence is complete    
 
 
         //Re-enable walking animation
         GetComponent<WalkAnimator>().enabled = true;
+
+        //Return to patrol state
+        State = EnemyState.PatrolWait;
     }    
 }
