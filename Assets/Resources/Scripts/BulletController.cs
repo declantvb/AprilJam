@@ -8,18 +8,22 @@ public class BulletController : MonoBehaviour
 	public float damage;
     public float knockbackForce = 20f;
 	public GameObject Owner;
+	[SerializeField] SpriteAnimation Fly;
+	[SerializeField] SpriteAnimation Hit;
+	private bool destroyed;
 
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
 	{
 		ttl = TimeToLive;
+		Fly.Play();
 	}
 
 	// Update is called once per frame
 	public void Update()
 	{
 		ttl -= Time.deltaTime;
-		if (ttl < 0)
+		if (ttl < 0 || (destroyed && !Hit.IsPlaying))
 		{
 			Destroy(gameObject);
 		}
@@ -28,7 +32,9 @@ public class BulletController : MonoBehaviour
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		DoDamageTo(other, damage, transform.up);
-		Destroy(gameObject);
+		Hit.PlayOneShot();
+		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		destroyed = true;
 	}
 
 	public void DoDamageTo(Collider2D other, float damage, Vector3 direction)
