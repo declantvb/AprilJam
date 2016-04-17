@@ -28,7 +28,7 @@ public class TiledLevelImporterEditor : Editor
 
             var obj = JsonUtility.FromJson<TiledLevel>(fileText);
 
-            obj.path = new FileInfo(filename).Directory.FullName;
+            obj.path = new FileInfo(filename).DirectoryName;
 
             CreateLevel(obj);
 
