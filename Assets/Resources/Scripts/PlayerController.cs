@@ -107,12 +107,24 @@ public class PlayerController : MonoBehaviour
 
 	private void HandleMovement()
 	{
-		var targetVelocity = (Vector2.right * Input.GetAxis(Controller.HorizontalAxis) + Vector2.up * -Input.GetAxis(Controller.VerticalAxis)).normalized * speed;
-		var delta = targetVelocity - rb2d.velocity;
-		rb2d.MovePosition(rb2d.position + delta * Time.deltaTime);
-	}
+        // Angry Daniel is angry. Wtf. Why is this using MovePosition again?
+        // And given it is, why is this stuff still called delta?
+        // I want you guys to know that this code means that if the player bumps into something physically,
+        // he will start floating in a direction, and moving has to fight against this. If you end up with enough
+        // force, you can't even overcome it with the power of your movement. You are chained in a direction. 
+        //
+        //var targetVelocity = (Vector2.right * Input.GetAxis(Controller.HorizontalAxis) + Vector2.up * -Input.GetAxis(Controller.VerticalAxis)).normalized * speed;
+        //var delta = targetVelocity - rb2d.velocity;
+        //rb2d.MovePosition(rb2d.position + delta * Time.deltaTime);
 
-	private void HandleShooting()
+
+
+        var targetVelocity = (Vector2.right * Input.GetAxis(Controller.HorizontalAxis) + Vector2.up * -Input.GetAxis(Controller.VerticalAxis)).normalized * speed;
+        var delta = targetVelocity - rb2d.velocity;
+        rb2d.AddForce(delta, ForceMode2D.Impulse);
+    }
+
+    private void HandleShooting()
 	{
         if (shootNextFrame && shootCooldown < 0f)
         {
