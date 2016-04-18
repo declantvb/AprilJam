@@ -38,8 +38,13 @@ public class InputController : MonoBehaviour
 			controller.FireAxis = RBButton + inputIndex;
 			controller.WeaponSwitchAxis = AButton + inputIndex;
             controller.ShowMapAxis = BButton + inputIndex;
-			controller.ViewportRect = new Rect(0.5f * (i / 2), 0.5f * (i % 2), 0.5f, 0.5f);
-		}
+            controller.ViewportRects = new Rect[] {
+                new Rect(0, 0, 1f, 1f),
+                new Rect(0.5f * (i / 2), 0.5f * (i % 2), 0.5f, 0.5f),
+                new Rect(0.5f * (i / 2), 0.5f * (i % 2), 0.5f, 0.5f),
+                new Rect(0.5f * (i / 2), 0.5f * (i % 2), 0.5f, 0.5f), // TODO: Move this to the actual update, so we can lay them out goodly.
+            };
+        }
 	}
 
 	// Update is called once per frame
@@ -47,6 +52,20 @@ public class InputController : MonoBehaviour
 	{
 
 	}
+
+    public void UpdateAllCameras()
+    {
+        var players = FindObjectsOfType<PlayerController>().Where(p => p.IsAlive).ToArray();
+        var viewportIndex = players.Length - 1;
+        if (viewportIndex > 3) viewportIndex = 3;
+
+        foreach (var player in players)
+        {
+            var camera = player.transform.parent.GetComponentInChildren<CameraController>();
+
+            camera.updateCameraViewport(player.Controller.ViewportRects[viewportIndex]);
+        }
+    }
 
 	internal Transform NextAvailablePlayer()
 	{

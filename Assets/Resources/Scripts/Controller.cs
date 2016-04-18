@@ -16,6 +16,8 @@ public class Controller : MonoBehaviour
 	public InputController inputMaster;
 	public GameController gameMaster;
 
+    public Rect[] ViewportRects { get; internal set; }
+
 
     // Use this for initialization
     void Start()
@@ -39,8 +41,8 @@ public class Controller : MonoBehaviour
         var player = inputMaster.NextAvailablePlayer();
         var avatar = player.GetComponentInChildren<PlayerController>();
         avatar.Controller = this;
-        var camera = player.GetComponentInChildren<CameraController>();
-        camera.updateCameraViewport(ViewportRect);
+
+        inputMaster.UpdateAllCameras();
 
         gameMaster.Lives--;        
     }

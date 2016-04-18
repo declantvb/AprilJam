@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 	[Header("Combat")]
 	public float health = 100f;
 
+    public bool IsAlive { get; private set; }
+
 	public GameObject bulletStart;
 	public bool SwitchingWeapon;
 	private float shootCooldown = 0f;
@@ -34,6 +36,12 @@ public class PlayerController : MonoBehaviour
     bool deathAnimFinished = false;
     private bool shootNextFrame;
 
+    public PlayerController()
+    {
+        IsAlive = true;
+    }
+
+
     // Use this for initialization
     void Start()
 	{
@@ -46,6 +54,7 @@ public class PlayerController : MonoBehaviour
 	{
         if (health <= 0)
         {
+            IsAlive = false;
             DestroyImmediate(GetComponentInChildren<WalkAnimator>());
             DestroyImmediate(GetComponentInChildren<GunMover>());
             DestroyImmediate(GunHolder);
