@@ -28,10 +28,14 @@ public class EnemySpawner : MonoBehaviour
 	[SerializeField] SpriteAnimation Anim_Die;
     [SerializeField] int state;
 
-	void Start()
+    private GameController gameController;
+
+    void Start()
     {
         nextSpawnDelay = Random.Range(MinSpawnDelay, MaxSpawnDelay);
 		Sprite = GetComponent<SpriteRenderer>();
+
+        gameController = FindObjectOfType<GameController>();
 	}
     
     void Update()
@@ -39,11 +43,15 @@ public class EnemySpawner : MonoBehaviour
 		if (!dead)
 		{
 			if (health <= 0)
-			{
-				Anim_Die.PlayOneShot(); 
+            {
+                StopAllCoroutines();
+
+                Anim_Die.PlayOneShot(); 
 				dead = true;
 
                 SoundEffects.Singleton.Play("Egg Burst");
+
+                gameController.EggKilled();
             }
 			else
 			{
@@ -136,6 +144,8 @@ public class EnemySpawner : MonoBehaviour
                 GameObject newEnemy = (GameObject)Instantiate(EnemyPrefab);
                 newEnemy.transform.position = transform.position;
                 SpawnedEnemies.Add(newEnemy.GetComponent<Enemy>());
+
+                gameController.CheckAliens();
             }
             else if (state == 3 && !Anim_Uncrack.IsPlaying)
             {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -12,15 +13,38 @@ public class GameController : MonoBehaviour
     public List<PlayerController> ActivePlayers = new List<PlayerController>();
     private float checkTime = 0;
 
-	// Use this for initialization
-	void Start()
-	{
+    public int AliensAlive { get; private set; }
+    public int AliensKilled { get; private set; }
+    public int EggsKilled { get; private set; }
+    public int EggsAlive { get; private set; }
 
+    // Use this for initialization
+    void Start()
+	{
+        CheckAliens();
 	}
+
+    public void CheckAliens()
+    {
+        AliensAlive = FindObjectsOfType<Enemy>().Length;
+        EggsAlive = FindObjectsOfType<EnemySpawner>().Length;
+    }
+
+    public void AlienKilled()
+    {
+        AliensKilled++;
+    }
+
+    public void EggKilled()
+    {
+        EggsKilled++;
+    }
 
 	// Update is called once per frame
 	void Update()
 	{
+
+
         if (checkTime <= 0)
         {
             ActivePlayers = FindObjectsOfType<PlayerController>().ToList();
@@ -55,9 +79,12 @@ public class GameController : MonoBehaviour
 	}
 
 	void OnGUI()
-	{
-		GUI.Box(new Rect(10, 10, 100, 50), "Lives: " + Lives);
-	}
+    {
+        GUI.Box(new Rect(10, 10, 200, 50), 
+            "Lives: " + Lives + Environment.NewLine +
+            "Aliens Alive / Killed: " + AliensAlive + " / " + AliensKilled + Environment.NewLine +
+            "Eggs Alive / Killed: " + EggsAlive + " / " + EggsKilled + Environment.NewLine);
+    }
 
 	public enum GameState
 	{

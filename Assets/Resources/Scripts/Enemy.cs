@@ -100,6 +100,9 @@ public class Enemy : MonoBehaviour
                 Anim_Death.PlayOneShot();
 
                 SoundEffects.Singleton.Play("Alien Death");
+
+                gameController.AlienKilled();
+                gameController.CheckAliens();
             }
             else
             {
