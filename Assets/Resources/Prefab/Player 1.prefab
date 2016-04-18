@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 452988}
   - 212: {fileID: 21204756}
+  - 114: {fileID: 11449266}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -189,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4238825, y: -4.307203, z: 0}
+  m_LocalPosition: {x: 10.012354, y: -0.6228027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435582}
@@ -500,6 +501,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxZoomout: 6
   ZoomSpeed: 10
+--- !u!114 &11449266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0949366396f87624e8195956257857f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: 50
+  CurrentSortOrder: -110
 --- !u!114 &11462742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -512,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Offset: 0
-  CurrentSortOrder: 260
+  CurrentSortOrder: -107
 --- !u!114 &11470602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2146,7 +2160,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -60
   m_Sprite: {fileID: 21300000, guid: 94cc7418a404fef4e9938baf5d91f6df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2176,7 +2190,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 260
+  m_SortingOrder: -107
   m_Sprite: {fileID: 21300000, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

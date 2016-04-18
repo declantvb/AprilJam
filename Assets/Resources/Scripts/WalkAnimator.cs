@@ -45,6 +45,9 @@ public class WalkAnimator : MonoBehaviour
 
 	void Start()
 	{
+        // Make player face right
+        previousPositon = transform.position + Vector3.left;
+
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		rb2d = GetComponent<Rigidbody2D>();
 		currentSpriteDirection = walkingUpSprites;

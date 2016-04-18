@@ -44,6 +44,8 @@ public class Controller : MonoBehaviour
 
         inputMaster.UpdateAllCameras();
 
-        gameMaster.Lives--;        
+        gameMaster.Lives--;
+
+        gameMaster.HideTitle();
     }
 }

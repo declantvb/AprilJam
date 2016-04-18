@@ -70,6 +70,22 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
+    m_Name: L_XAxis_4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: a
+    positiveButton: d
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.3
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: L_YAxis_1
     descriptiveName: 
     descriptiveNegativeName: 
@@ -134,6 +150,22 @@ InputManager:
     axis: 1
     joyNum: 4
   - serializedVersion: 3
+    m_Name: L_YAxis_4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: w
+    positiveButton: s
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.3
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 1
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: A_1
     descriptiveName: 
     descriptiveNegativeName: 
@@ -188,7 +220,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 4 button 0
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: e
     gravity: 1000
     dead: 0.3
     sensitivity: 1000
@@ -508,7 +540,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 4 button 5
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: q
     gravity: 1000
     dead: 0.3
     sensitivity: 1000
@@ -838,6 +870,22 @@ InputManager:
     axis: 4
     joyNum: 4
   - serializedVersion: 3
+    m_Name: R_YAxis_4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: up
+    positiveButton: down
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.3
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 4
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: R_XAxis_1
     descriptiveName: 
     descriptiveNegativeName: 
@@ -899,6 +947,22 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
+    axis: 3
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: R_XAxis_4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: left
+    positiveButton: right
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.3
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
     axis: 3
     joyNum: 4
   - serializedVersion: 3

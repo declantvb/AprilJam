@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 	public int Lives;
 	public GameState CurrentState;
 
+    public GameObject Title;
+
     public List<PlayerController> ActivePlayers = new List<PlayerController>();
     private float checkTime = 0;
 
@@ -77,6 +79,15 @@ public class GameController : MonoBehaviour
 				break;
 		}
 	}
+
+    public void HideTitle()
+    {
+        if (Title != null)
+        {
+            Destroy(Title);
+            Title = null;
+        }
+    }
 
 	void OnGUI()
     {

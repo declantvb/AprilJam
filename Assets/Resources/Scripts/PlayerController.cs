@@ -47,7 +47,11 @@ public class PlayerController : MonoBehaviour
 	{
 		shootCooldown = 0f;
 		rb2d = GetComponent<Rigidbody2D>();
-	}
+
+
+        var angle = Vector3.Angle(Vector3.up, Vector3.right) * (Vector3.Cross(Vector3.up, Vector3.right).z < 0 ? -1 : 1);
+        rotation = Quaternion.Euler(0, 0, angle);
+    }
 
 	// Update is called once per frame
 	void Update()
