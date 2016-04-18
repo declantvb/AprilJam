@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public Controller Controller;
 
     bool deathAnimFinished = false;
+    private bool shootNextFrame;
 
     // Use this for initialization
     void Start()
@@ -104,7 +105,13 @@ public class PlayerController : MonoBehaviour
 
 	private void HandleShooting()
 	{
-		if (Input.GetAxis(Controller.WeaponSwitchAxis) > 0)
+        if (shootNextFrame && shootCooldown < 0f)
+        {
+            FireWeapon();
+        }
+        shootNextFrame = false;
+
+        if (Input.GetAxis(Controller.WeaponSwitchAxis) > 0)
 		{
 			if (!SwitchingWeapon)
 			{
@@ -119,20 +126,16 @@ public class PlayerController : MonoBehaviour
 
 		Vector2 shootDirection = Vector2.right * -Input.GetAxis(Controller.HorizontalAimAxis) + Vector2.up * Input.GetAxis(Controller.VerticalAimAxis);
 
-		if (shootDirection.sqrMagnitude > 0.0f)
+		if (shootDirection.sqrMagnitude > 0.3f)
 		{
 			var angle = Vector3.Angle(Vector3.up, -shootDirection) * (Vector3.Cross(Vector3.up, -shootDirection).z < 0 ? -1 : 1);
 			rotation = Quaternion.Euler(0, 0, angle);
+            shootNextFrame = true;
 
 			//rotation = Quaternion.LookRotation(shootDirection, Vector3.forward);
 			//rotation.x = 0;
 			//rotation.y = 0;
 			//transform.rotation = rot;
-
-			if (shootCooldown < 0f)
-			{
-				FireWeapon();
-			}
 		}
 		shootCooldown -= Time.deltaTime;
 	}
