@@ -189,7 +189,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.319901, y: -24.766705, z: 0}
+  m_LocalPosition: {x: 1.4238825, y: -4.307203, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435582}
@@ -443,7 +443,7 @@ MonoBehaviour:
     Damage: 30
     ShellCount: 1
     ShellSpeed: 10
-    Cooldown: 0.25
+    Cooldown: 0.17
     Accuracy: 0.6
     SpeedJitterPercent: 0
   - BulletPrefab: {fileID: 199206, guid: 9a3ca72efc27d4740b30ec48b18ecbcf, type: 2}
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Offset: 0
-  CurrentSortOrder: 2306
+  CurrentSortOrder: 260
 --- !u!114 &11470602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2176,7 +2176,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 2306
+  m_SortingOrder: 260
   m_Sprite: {fileID: 21300000, guid: eb782118848692b45aa1c53d5a86a902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

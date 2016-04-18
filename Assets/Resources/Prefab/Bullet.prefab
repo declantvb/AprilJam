@@ -166,7 +166,7 @@ MonoBehaviour:
   - {fileID: 21300010, guid: 94153cfd28b08e54d80017fe39c69323, type: 3}
   - {fileID: 21300012, guid: 94153cfd28b08e54d80017fe39c69323, type: 3}
   - {fileID: 21300014, guid: 94153cfd28b08e54d80017fe39c69323, type: 3}
-  FrameDelay: 0.2
+  FrameDelay: 0.1
   currentFrame: 0
   Playing: 0
   OneShotting: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 94153cfd28b08e54d80017fe39c69323, type: 3}
   - {fileID: 21300004, guid: 94153cfd28b08e54d80017fe39c69323, type: 3}
   - {fileID: 21300006, guid: 94153cfd28b08e54d80017fe39c69323, type: 3}
-  FrameDelay: 0.2
+  FrameDelay: 0.1
   currentFrame: 0
   Playing: 0
   OneShotting: 0

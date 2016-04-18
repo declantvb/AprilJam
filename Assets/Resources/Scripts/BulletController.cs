@@ -35,6 +35,9 @@ public class BulletController : MonoBehaviour
 		Hit.PlayOneShot();
 		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		destroyed = true;
+
+        // Don't hit any more things after hit
+        Destroy(GetComponent<Collider2D>());
 	}
 
 	public void DoDamageTo(Collider2D other, float damage, Vector3 direction)
