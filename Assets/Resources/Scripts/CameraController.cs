@@ -45,7 +45,6 @@ public class CameraController : MonoBehaviour
         if (zoomOut < 0) zoomOut = 0;
 
         localCamera.orthographicSize = defaultSize * (1 + zoomOut);
-
-        Debug.Log(zoomingOut + " - " + zoomOut);
+        
     }
 }
